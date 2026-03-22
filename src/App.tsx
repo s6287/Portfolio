@@ -176,7 +176,7 @@ export default function App() {
 
       <main className="max-w-7xl mx-auto px-6 pt-24 md:pt-32 pb-24 relative z-10">
         {/* Hero Section */}
-        <section className="mb-20 md:mb-24">
+        <section className="mb-24 md:mb-32">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
               <div className="status-dot animate-pulse" />
@@ -187,7 +187,7 @@ export default function App() {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             <div className="lg:col-span-8">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -199,7 +199,7 @@ export default function App() {
               <motion.h1 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium mb-6 leading-[1.2] md:leading-[1.15] tracking-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-medium mb-6 leading-[1.2] md:leading-[1.15] tracking-tight"
               >
                 I engineer <span className="glow-text">data-intensive systems</span> that automate workflows and operate under real-world constraints.
               </motion.h1>
@@ -239,10 +239,10 @@ export default function App() {
               </div>
             </div>
 
-            <div className="lg:col-span-4 flex flex-col gap-6 justify-end">
+            <div className="lg:col-span-4 flex flex-col gap-6">
               <div className="hardware-card border-l-4 border-l-emerald-500 tactile-card">
-                <div className="hardware-card-content p-8">
-                  <div className="micro-label mb-6">Personnel_Profile</div>
+                <div className="hardware-card-content p-6">
+                  <div className="micro-label mb-4">Personnel_Profile</div>
                   <div className="flex items-center gap-4 mb-8">
                     <div className="w-16 h-16 bg-white/5 border border-white/10 flex items-center justify-center relative overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-transparent" />
@@ -271,7 +271,7 @@ export default function App() {
               </div>
 
               <div className="hardware-card border-l-4 border-l-emerald-500/30 tactile-card">
-                <div className="hardware-card-content p-8">
+                <div className="hardware-card-content p-6">
                   <div className="micro-label mb-4">Core_Competencies</div>
                   <div className="space-y-4">
                     {[

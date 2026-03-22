@@ -93,11 +93,11 @@
   }
 
   .nav-link {
-    @apply flex items-center gap-2 px-4 py-1.5 rounded-full font-mono text-[9px] uppercase tracking-widest text-white/40 hover:text-white hover:bg-white/5 transition-all duration-200;
+    @apply flex items-center gap-2 px-2 sm:px-4 py-1.5 rounded-full font-mono text-[9px] uppercase tracking-widest text-white/40 hover:text-white hover:bg-white/5 transition-all duration-200;
   }
 
   .nav-link-primary {
-    @apply flex items-center gap-2 px-4 py-1.5 rounded-full font-mono text-[9px] uppercase tracking-widest text-black bg-accent hover:bg-accent/90 transition-all duration-200 shadow-[0_0_15px_rgba(16,185,129,0.3)];
+    @apply flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full font-mono text-[9px] uppercase tracking-widest text-black bg-accent hover:bg-accent/90 transition-all duration-200 shadow-[0_0_15px_rgba(16,185,129,0.3)];
   }
 
   .dashed-line {

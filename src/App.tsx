@@ -26,7 +26,8 @@ import {
   Lock,
   Eye,
   HelpCircle,
-  X
+  X,
+  Terminal
 } from "lucide-react";
 
 const SEOPipelineDiagram = () => {
@@ -250,11 +251,11 @@ export default function App() {
       </div>
 
       {/* Top Navigation Bar */}
-      <div className="fixed top-0 left-0 w-full h-16 border-b border-white/5 bg-ink/80 backdrop-blur-xl z-40 px-6 flex items-center justify-between">
-        <div className="flex items-center gap-6">
+      <div className="fixed top-0 left-0 w-full h-16 border-b border-white/5 bg-ink/80 backdrop-blur-xl z-40 px-4 md:px-6 flex items-center justify-between">
+        <div className="flex items-center gap-3 md:gap-6">
           <div className="auth-badge group cursor-default">
-            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse group-hover:shadow-[0_0_10px_rgba(16,185,129,1)] transition-shadow" />
-            <span className="group-hover:text-emerald-400 transition-colors">PORTFOLIO_AUTH: ACTIVE</span>
+            <Terminal className="w-3 h-3 text-emerald-500 group-hover:shadow-[0_0_10px_rgba(16,185,129,1)] transition-all" />
+            <span className="group-hover:text-emerald-400 transition-colors">SHIVAM_SINGH</span>
           </div>
           <div className="hidden lg:block h-4 w-px bg-white/10" />
           <div className="hidden lg:flex items-center gap-3">
@@ -265,18 +266,18 @@ export default function App() {
           </div>
         </div>
 
-        <nav className="flex items-center gap-1 md:gap-2 bg-white/5 p-1 rounded-full border border-white/10">
+        <nav className="flex items-center gap-1 bg-white/5 p-1 rounded-full border border-white/10">
           <a href="#projects" className="nav-link group">
             <Layers className="w-3 h-3 group-hover:text-emerald-400 transition-colors" />
-            <span>Projects</span>
+            <span className="hidden sm:inline">Projects</span>
           </a>
           <a href="#approach" className="nav-link group">
             <Workflow className="w-3 h-3 group-hover:text-emerald-400 transition-colors" />
-            <span>Approach</span>
+            <span className="hidden sm:inline">Approach</span>
           </a>
           <a href="#contact" className="nav-link-primary group">
             <Mail className="w-3 h-3 group-hover:scale-110 transition-transform" />
-            <span>Contact</span>
+            <span className="hidden sm:inline">Contact</span>
           </a>
         </nav>
       </div>

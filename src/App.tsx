@@ -19,45 +19,54 @@ import {
   Workflow,
   Search,
   CheckCircle2,
-  ArrowDown
+  ArrowDown,
+  User
 } from "lucide-react";
 
-const SEOPipelineDiagram = () => (
-  <div className="mt-8 p-8 hardware-card overflow-hidden">
-    <div className="flex flex-col items-center">
-      <div className="flex flex-col items-center gap-2 w-full max-w-xs">
-        <div className="w-full h-10 rounded border border-emerald-500/30 bg-emerald-500/5 flex items-center justify-center text-[11px] font-mono text-emerald-400">
-          Orchestrator
-        </div>
-        <ArrowDown className="w-3 h-3 text-white/20" />
-        <div className="w-full py-3 rounded border border-blue-500/30 bg-blue-500/5 flex flex-col items-center justify-center gap-1">
-          <div className="text-[11px] font-mono text-blue-400">Worker Pool</div>
-          <div className="text-[9px] text-blue-400/60 uppercase tracking-widest">(1–20 concurrent)</div>
-        </div>
-        <ArrowDown className="w-3 h-3 text-white/20" />
-        <div className="w-full h-10 rounded border border-white/10 bg-white/5 flex items-center justify-center text-[11px] font-mono text-[#A1A1AA]">
-          API Calls (DataForSEO)
-        </div>
-        <ArrowDown className="w-3 h-3 text-white/20" />
-        <div className="w-full h-10 rounded border border-purple-500/30 bg-purple-500/5 flex items-center justify-center text-[11px] font-mono text-purple-400">
-          Deduplication & Sync Layer
-        </div>
-        <ArrowDown className="w-3 h-3 text-white/20" />
-        <div className="w-full h-10 rounded border border-white/10 bg-white/5 flex items-center justify-center text-[11px] font-mono text-[#A1A1AA]">
-          PostgreSQL
-        </div>
-        <ArrowDown className="w-3 h-3 text-white/20" />
-        <div className="w-full h-10 rounded border border-white/10 bg-white/5 flex items-center justify-center text-[11px] font-mono text-[#A1A1AA]">
-          Dashboard
-        </div>
+const SEOPipelineDiagram = () => {
+  const steps = [
+    { id: "01", label: "Orchestrator", sub: "Dynamic Worker Calculation", color: "emerald" },
+    { id: "02", label: "Worker Pool", sub: "(1–20 concurrent)", color: "blue" },
+    { id: "03", label: "API Calls (DataForSEO)", sub: "High-Frequency Requests", color: "zinc" },
+    { id: "04", label: "Deduplication & Sync", sub: "Credit Optimization Layer", color: "purple" },
+    { id: "05", label: "PostgreSQL", sub: "Persistent Storage", color: "zinc" },
+    { id: "06", label: "Dashboard", sub: "Real-time Visualization", color: "zinc" },
+  ];
+
+  return (
+    <div className="mt-8 p-8 hardware-card overflow-hidden bg-white/[0.02]">
+      <div className="flex flex-col items-center gap-1">
+        {steps.map((step, index) => (
+          <div key={step.id} className="flex flex-col items-center w-full max-w-xs">
+            <div className={`w-full p-3 rounded border flex flex-col items-center justify-center gap-1 transition-colors
+              ${step.color === 'emerald' ? 'border-emerald-500/30 bg-emerald-500/5 text-emerald-400' : 
+                step.color === 'blue' ? 'border-blue-500/30 bg-blue-500/5 text-blue-400' :
+                step.color === 'purple' ? 'border-purple-500/30 bg-purple-500/5 text-purple-400' :
+                'border-white/10 bg-white/5 text-white/60'}`}
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-[8px] opacity-40 font-mono">{step.id}</span>
+                <span className="text-[11px] font-mono uppercase tracking-wider">{step.label}</span>
+              </div>
+              <span className="text-[9px] opacity-60 uppercase tracking-widest">{step.sub}</span>
+            </div>
+            {index < steps.length - 1 && (
+              <div className="flex flex-col items-center py-1">
+                <div className="w-px h-4 bg-white/10" />
+                <ArrowDown className="w-3 h-3 text-white/20 -mt-1" />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+      <div className="mt-8 pt-4 border-t border-white/5">
+        <p className="text-center text-[9px] text-white/20 uppercase tracking-[0.2em]">
+          System Architecture // Pipeline_v1.0.4
+        </p>
       </div>
     </div>
-    <div className="dashed-line opacity-50" />
-    <p className="text-center text-[10px] text-[#71717A] uppercase tracking-widest">
-      Architecture Walkthrough Available on Request
-    </p>
-  </div>
-);
+  );
+};
 
 const PROJECTS = [
   {
@@ -133,39 +142,84 @@ export default function App() {
         />
       </div>
 
-      <main className="max-w-7xl mx-auto px-6 pt-12 md:pt-16 pb-24 relative z-10">
+      {/* Top Navigation Bar */}
+      <div className="fixed top-0 left-0 w-full h-16 border-b border-white/5 bg-ink/80 backdrop-blur-xl z-40 px-6 flex items-center justify-between">
+        <div className="flex items-center gap-6">
+          <div className="auth-badge group cursor-default">
+            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse group-hover:shadow-[0_0_10px_rgba(16,185,129,1)] transition-shadow" />
+            <span className="group-hover:text-emerald-400 transition-colors">PORTFOLIO_AUTH: ACTIVE</span>
+          </div>
+          <div className="hidden lg:block h-4 w-px bg-white/10" />
+          <div className="hidden lg:flex items-center gap-3">
+            <span className="micro-label text-white/20">Role:</span>
+            <div className="system-log text-emerald-500/80">
+              Full_Stack_Dev_v1.0
+            </div>
+          </div>
+        </div>
+
+        <nav className="flex items-center gap-1 md:gap-2 bg-white/5 p-1 rounded-full border border-white/10">
+          <a href="#projects" className="nav-link group">
+            <Layers className="w-3 h-3 group-hover:text-emerald-400 transition-colors" />
+            <span>Projects</span>
+          </a>
+          <a href="#approach" className="nav-link group">
+            <Workflow className="w-3 h-3 group-hover:text-emerald-400 transition-colors" />
+            <span>Approach</span>
+          </a>
+          <a href="#contact" className="nav-link-primary group">
+            <Mail className="w-3 h-3 group-hover:scale-110 transition-transform" />
+            <span>Contact</span>
+          </a>
+        </nav>
+      </div>
+
+      <main className="max-w-7xl mx-auto px-6 pt-24 md:pt-32 pb-24 relative z-10">
         {/* Hero Section */}
-        <section className="mb-16 md:mb-20">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="status-dot" />
-            <span className="micro-label">System Active // Mumbai, IN</span>
+        <section className="mb-20 md:mb-24">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <div className="status-dot animate-pulse" />
+              <span className="micro-label">Personnel_File</span>
+            </div>
+            <div className="hidden sm:block px-2 py-0.5 border border-emerald-500/30 rounded-sm">
+              <span className="micro-label text-emerald-500 text-[8px]">Available_for_Hire</span>
+            </div>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
             <div className="lg:col-span-8">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="mb-4"
+              >
+                <span className="font-mono text-emerald-500 text-sm tracking-widest uppercase">Full Stack Developer</span>
+              </motion.div>
               <motion.h1 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium mb-6 leading-[1.2] md:leading-[1.15] tracking-tight"
               >
-                I engineer <span className="text-emerald-500">data-intensive systems</span> that automate workflows and operate under real-world constraints.
+                I engineer <span className="glow-text">data-intensive systems</span> that automate workflows and operate under real-world constraints.
               </motion.h1>
               
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="text-base md:text-xl text-white/60 max-w-2xl leading-relaxed mb-6"
+                className="text-base md:text-xl text-white/60 max-w-2xl leading-relaxed mb-8"
               >
-                Software Engineer with 1 year of experience building production systems — including 
-                multi-tenant platforms, data pipelines, and CRM systems handling 50K+ records.
+                I am a Full-Stack Developer specializing in building robust web infrastructure and data-intensive systems. 
+                From high-throughput pipelines to intuitive user interfaces, I focus on 
+                reliability, scale, and technical excellence.
               </motion.p>
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 }}
-                className="flex items-start md:items-center gap-3 mb-8"
+                className="flex items-start md:items-center gap-3 mb-10"
               >
                 <div className="h-px w-6 md:w-8 bg-emerald-500/30 mt-2 md:mt-0" />
                 <p className="micro-label text-emerald-500/60 text-[8px] sm:text-[9px] leading-relaxed">
@@ -175,25 +229,56 @@ export default function App() {
 
               <div className="flex flex-wrap gap-4">
                 <a href="#projects" className="px-8 py-4 bg-emerald-500 text-black font-medium hover:bg-emerald-400 transition-colors flex items-center gap-2 group">
-                  View Work
+                  Access_Project_Logs
                   <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </a>
                 <a href="#contact" className="px-8 py-4 border border-white/10 hover:bg-white/5 transition-colors flex items-center gap-2 group">
-                  Contact Me
+                  Initiate_Contact
                   <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 </a>
               </div>
             </div>
 
-            <div className="lg:col-span-4 flex flex-col justify-end">
-              <div className="hardware-card border-l-4 border-l-emerald-500">
+            <div className="lg:col-span-4 flex flex-col gap-6 justify-end">
+              <div className="hardware-card border-l-4 border-l-emerald-500 tactile-card">
+                <div className="hardware-card-content p-8">
+                  <div className="micro-label mb-6">Personnel_Profile</div>
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="w-16 h-16 bg-white/5 border border-white/10 flex items-center justify-center relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-transparent" />
+                      <User className="w-8 h-8 text-emerald-500/40" />
+                    </div>
+                    <div>
+                      <div className="text-lg font-medium">Shivam Singh</div>
+                      <div className="micro-label text-emerald-500/60">Full Stack Developer</div>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center text-[10px] font-mono">
+                      <span className="text-white/40">LOCATION</span>
+                      <span className="text-white/80">MUMBAI, IN</span>
+                    </div>
+                    <div className="flex justify-between items-center text-[10px] font-mono">
+                      <span className="text-white/40">EXPERIENCE</span>
+                      <span className="text-white/80">1.9_YEARS</span>
+                    </div>
+                    <div className="flex justify-between items-center text-[10px] font-mono">
+                      <span className="text-white/40">SPECIALIZATION</span>
+                      <span className="text-white/80">FULL_STACK</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="hardware-card border-l-4 border-l-emerald-500/30 tactile-card">
                 <div className="hardware-card-content p-8">
                   <div className="micro-label mb-4">Core_Competencies</div>
                   <div className="space-y-4">
                     {[
-                      { icon: Database, text: "Systems Architecture" },
-                      { icon: Cpu, text: "Data Processing" },
-                      { icon: Layers, text: "Multi-tenant Scaling" }
+                      { icon: Database, text: "Full-Stack Architecture" },
+                      { icon: Code2, text: "Frontend Engineering" },
+                      { icon: Cpu, text: "Backend Systems" },
+                      { icon: Layers, text: "Scalable Infrastructure" }
                     ].map((item, i) => (
                       <div key={i} className="flex items-center gap-3 text-sm text-white/80">
                         <item.icon className="w-4 h-4 text-emerald-500" />
@@ -209,7 +294,7 @@ export default function App() {
 
         {/* Metrics Bar */}
         <section className="mb-32">
-          <div className="grid grid-cols-2 lg:grid-cols-4 border border-white/10 bg-ink/50 backdrop-blur-md">
+          <div className="grid grid-cols-2 lg:grid-cols-4 border border-white/10 bg-ink/50 backdrop-blur-md tactile-card">
             {[
               { label: "Production Systems", value: "03", sub: "Built & Deployed" },
               { label: "Records Processed", value: "50K+", sub: "Per Upload" },
@@ -278,7 +363,7 @@ export default function App() {
                 </div>
 
                 <div className="lg:col-span-7">
-                  <div className="hardware-card">
+                  <div className="hardware-card tactile-card">
                     <div className="hardware-card-content p-8 lg:p-12">
                       <div className="space-y-12">
                         <section>
@@ -315,7 +400,7 @@ export default function App() {
 
         {/* Engineering Philosophy */}
         <section id="approach" className="mb-32">
-          <div className="hardware-card border-t-4 border-t-emerald-500">
+          <div className="hardware-card border-t-4 border-t-emerald-500 tactile-card">
             <div className="hardware-card-content p-12">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                 <div className="lg:col-span-4">
@@ -387,14 +472,14 @@ export default function App() {
 
         {/* Contact */}
         <section id="contact">
-          <div className="hardware-card p-12 text-center relative overflow-visible">
+          <div className="hardware-card p-12 text-center relative overflow-visible tactile-card">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 bg-[#0A0A0B] border border-white/10 z-30">
-              <div className="micro-label">Terminal_End</div>
+              <div className="micro-label">Personnel_Signature</div>
             </div>
             <div className="hardware-card-content">
               <h2 className="text-4xl lg:text-5xl font-medium mb-8">
-                Interested in building <br />
-                <span className="text-emerald-500 font-mono tracking-tighter">scalable_systems?</span>
+                Let's build the <br />
+                <span className="text-emerald-500 font-mono tracking-tighter">next_system.</span>
               </h2>
               <p className="text-white/60 mb-12 max-w-xl mx-auto leading-relaxed">
                 I'm currently looking for SDE-1 roles at product-driven companies. 
@@ -403,7 +488,7 @@ export default function App() {
               <div className="flex flex-col md:flex-row items-center justify-center gap-6">
                 <a href="mailto:shivamsinghsrs@gmail.com" className="flex items-center gap-3 px-8 py-4 bg-emerald-500 text-black font-medium hover:bg-emerald-400 transition-colors">
                   <Mail className="w-4 h-4" />
-                  shivamsinghsrs@gmail.com
+                  Initiate_Contact
                 </a>
                 <div className="flex items-center gap-4">
                   <a href="https://linkedin.com/in/shiivmrajput" target="_blank" rel="noopener noreferrer" className="p-4 border border-white/10 hover:bg-white/5 transition-colors">
@@ -414,6 +499,15 @@ export default function App() {
                   </a>
                 </div>
               </div>
+
+              <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="micro-label">© 2026 // Full Stack Developer</div>
+                <div className="flex items-center gap-4">
+                  <span className="micro-label text-emerald-500/40">Build_v1.0.4</span>
+                  <div className="h-3 w-px bg-white/10" />
+                  <span className="micro-label">Mumbai, India</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -422,13 +516,12 @@ export default function App() {
       {/* Footer Micro-details */}
       <footer className="max-w-7xl mx-auto px-6 pb-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-12 border-t border-white/5">
-          <div className="micro-label">© 2026 SHIVAM_SINGH // ALL_RIGHTS_RESERVED</div>
+          <div className="micro-label">© 2026 // ALL_RIGHTS_RESERVED</div>
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
               <div className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
               <span className="micro-label">Server_Status: Optimal</span>
             </div>
-            <div className="micro-label text-white/20">Built_with: React + Tailwind + Engineering</div>
           </div>
         </div>
       </footer>

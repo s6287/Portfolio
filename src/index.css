@@ -54,8 +54,50 @@
     @apply font-mono text-[9px] uppercase tracking-[0.2em] text-white/40;
   }
 
+  .glow-text {
+    @apply text-accent;
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+  }
+
+  .tactile-card {
+    @apply transition-all duration-300 border-white/10 hover:border-accent/30 hover:bg-accent/[0.02] hover:-translate-y-1;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .tactile-card:hover {
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.05);
+  }
+
+  .auth-badge {
+    @apply flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 font-mono text-[9px] uppercase tracking-wider text-white/60;
+  }
+
+  .system-log {
+    @apply font-mono text-[9px] text-accent/60 overflow-hidden whitespace-nowrap;
+    border-right: 2px solid theme('colors.accent');
+    animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+  }
+
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: theme('colors.accent') }
+  }
+
   .status-dot {
     @apply w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_8px_rgba(16,185,129,0.6)];
+  }
+
+  .nav-link {
+    @apply flex items-center gap-2 px-4 py-1.5 rounded-full font-mono text-[9px] uppercase tracking-widest text-white/40 hover:text-white hover:bg-white/5 transition-all duration-200;
+  }
+
+  .nav-link-primary {
+    @apply flex items-center gap-2 px-4 py-1.5 rounded-full font-mono text-[9px] uppercase tracking-widest text-black bg-accent hover:bg-accent/90 transition-all duration-200 shadow-[0_0_15px_rgba(16,185,129,0.3)];
   }
 
   .dashed-line {

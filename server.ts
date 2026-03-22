@@ -14,7 +14,7 @@ async function startServer() {
 
   // Telegram Configuration
   const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "8713475964:AAGxd0SGXKhbfHjfnHkgExQmMlXKJ3XSDqw";
-  const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "8713475964";
+  const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "5767428461";
 
   console.log(`📡 Telegram Bot initialized. Target Chat ID: ${TELEGRAM_CHAT_ID}`);
 
@@ -55,12 +55,15 @@ async function startServer() {
           console.error("❌ TELEGRAM ERROR 403: The bot cannot send you messages yet.");
           console.error("👉 FIX: Search for your bot on Telegram and click 'START'.");
           console.error("👉 ALSO: Ensure TELEGRAM_CHAT_ID is YOUR ID, not the bot's ID.");
+          return res.status(403).json({ error: "Bot not started or wrong Chat ID." });
         } else {
           console.error("Telegram API Error:", errorData);
+          return res.status(500).json({ error: "Telegram API Error" });
         }
       }
     } catch (error) {
       console.error("Failed to send Telegram notification:", error);
+      return res.status(500).json({ error: "Internal Server Error" });
     }
 
     res.status(200).json({ status: "ok" });

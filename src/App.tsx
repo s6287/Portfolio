@@ -719,6 +719,30 @@ export default function App() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-12 border-t border-white/5">
           <div className="micro-label">© 2026 // ALL_RIGHTS_RESERVED</div>
           <div className="flex items-center gap-6">
+            <button 
+              onClick={async () => {
+                try {
+                  const res = await fetch("/api/visitor", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      location: "Footer Test",
+                      device: navigator.userAgent,
+                      referrer: "Footer_Test_Button",
+                      time: new Date().toLocaleString()
+                    }),
+                  });
+                  if (res.ok) alert("Test notification sent! Check your Telegram.");
+                  else alert("Failed to send. Check server logs.");
+                } catch (e) {
+                  alert("Error sending test notification.");
+                }
+              }}
+              className="flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 hover:border-emerald-500/50 transition-all group"
+            >
+              <Zap className="w-3 h-3 text-emerald-500 group-hover:animate-pulse" />
+              <span className="micro-label text-emerald-500/80">Test_Telegram</span>
+            </button>
             <div className="flex items-center gap-2">
               <div className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
               <span className="micro-label">Server_Status: Optimal</span>

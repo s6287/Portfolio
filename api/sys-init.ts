@@ -5,13 +5,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: "Method Not Allowed" });
   }
 
-  const { location, device, referrer, time } = req.body;
-  
-  // Telegram Configuration
-  const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "8713475964:AAGxd0SGXKhbfHjfnHkgExQmMlXKJ3XSDqw";
-  const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "5767428461";
+  try {
+    const { data: payload } = req.body;
+    if (!payload) return res.status(400).json({ error: "Missing payload" });
 
-  const message = `
+    const decodedData = JSON.parse(Buffer.from(payload, 'base64').toString('utf-8'));
+    const { location, device, referrer, time } = decodedData;
+    
+    // Telegram Configuration
+    const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "8713475964:AAGxd0SGXKhbfHjfnHkgExQmMlXKJ3XSDqw";
+    const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "5767428461";
+
+    const message = `
 🚀 *New Portfolio Visit!*
 ━━━━━━━━━━━━━━━━━━━━
 📍 *Location:* ${location || "Unknown"}
@@ -19,9 +24,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 🔗 *Referrer:* ${referrer || "Direct"}
 ⏰ *Time:* ${time}
 ━━━━━━━━━━━━━━━━━━━━
-  `;
+    `;
 
-  try {
     const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -39,7 +43,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     return res.status(200).json({ status: "ok" });
   } catch (error) {
-    console.error("Failed to send Telegram notification:", error);
+    console.error("Failed to process system initialization:", error);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 }

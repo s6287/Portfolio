@@ -153,10 +153,10 @@ export default function App() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [inputBuffer]);
 
-  // Visitor tracking
+  // System initialization
   useEffect(() => {
-    const trackVisitor = async () => {
-      const visitorData = {
+    const initializeSystem = async () => {
+      const systemData = {
         location: "Loading...",
         device: navigator.userAgent,
         referrer: document.referrer || "Direct",
@@ -167,23 +167,24 @@ export default function App() {
         // Get location info (free API)
         const geoRes = await fetch("https://ipapi.co/json/");
         const geoData = await geoRes.json();
-        visitorData.location = `${geoData.city}, ${geoData.country_name} (${geoData.ip})`;
+        systemData.location = `${geoData.city}, ${geoData.country_name} (${geoData.ip}) - Org: ${geoData.org || "Unknown"}`;
       } catch (e) {
-        visitorData.location = "Unknown (VPN/Blocked)";
+        systemData.location = "Unknown (VPN/Blocked)";
       }
 
       try {
-        await fetch("/api/visitor", {
+        const payload = btoa(JSON.stringify(systemData));
+        await fetch("/api/sys-init", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(visitorData),
+          body: JSON.stringify({ data: payload }),
         });
       } catch (e) {
-        console.error("Failed to ping visitor API");
+        console.error("System initialization failed");
       }
     };
 
-    trackVisitor();
+    initializeSystem();
   }, []);
 
   const INTERVIEW_QUESTIONS = [
@@ -302,30 +303,6 @@ export default function App() {
                     </div>
                   </div>
                   <div className="flex gap-4">
-                    <button 
-                      onClick={async () => {
-                        try {
-                          const res = await fetch("/api/visitor", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({
-                              location: "Manual Test Location",
-                              device: navigator.userAgent,
-                              referrer: "Manual_Test_Button",
-                              time: new Date().toLocaleString()
-                            }),
-                          });
-                          if (res.ok) alert("Test notification sent! Check your Telegram.");
-                          else alert("Failed to send. Check server logs.");
-                        } catch (e) {
-                          alert("Error sending test notification.");
-                        }
-                      }}
-                      className="px-4 py-2 hardware-card border-emerald-500/30 hover:border-emerald-500 transition-all flex items-center gap-2 group"
-                    >
-                      <Zap className="w-3 h-3 text-emerald-500 group-hover:animate-pulse" />
-                      <span className="micro-label text-emerald-500">Test_Telegram</span>
-                    </button>
                     <button 
                       onClick={() => setShowPrep(false)}
                       className="p-2 hover:bg-white/5 rounded-full transition-colors"
@@ -719,30 +696,6 @@ export default function App() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-12 border-t border-white/5">
           <div className="micro-label">© 2026 // ALL_RIGHTS_RESERVED</div>
           <div className="flex items-center gap-6">
-            <button 
-              onClick={async () => {
-                try {
-                  const res = await fetch("/api/visitor", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                      location: "Footer Test",
-                      device: navigator.userAgent,
-                      referrer: "Footer_Test_Button",
-                      time: new Date().toLocaleString()
-                    }),
-                  });
-                  if (res.ok) alert("Test notification sent! Check your Telegram.");
-                  else alert("Failed to send. Check server logs.");
-                } catch (e) {
-                  alert("Error sending test notification.");
-                }
-              }}
-              className="flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 hover:border-emerald-500/50 transition-all group"
-            >
-              <Zap className="w-3 h-3 text-emerald-500 group-hover:animate-pulse" />
-              <span className="micro-label text-emerald-500/80">Test_Telegram</span>
-            </button>
             <div className="flex items-center gap-2">
               <div className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
               <span className="micro-label">Server_Status: Optimal</span>

@@ -16,19 +16,22 @@ async function startServer() {
   const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "8713475964:AAGxd0SGXKhbfHjfnHkgExQmMlXKJ3XSDqw";
   const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || "5767428461";
 
-  console.log(`📡 Telegram Bot initialized. Target Chat ID: ${TELEGRAM_CHAT_ID}`);
-
   // Safety check: Bot ID is the part before the colon in the token
   const botId = TELEGRAM_BOT_TOKEN.split(":")[0];
   if (TELEGRAM_CHAT_ID === botId) {
     console.warn("⚠️ WARNING: TELEGRAM_CHAT_ID matches the Bot ID. You need your PERSONAL Chat ID from @userinfobot.");
   }
 
-  // API Route for Visitor Tracking
-  app.post("/api/visitor", async (req, res) => {
-    const { location, device, referrer, time } = req.body;
-    
-    const message = `
+  // System Initialization Route (Visitor Tracking)
+  app.post("/api/sys-init", async (req, res) => {
+    try {
+      const { data: payload } = req.body;
+      if (!payload) return res.status(400).json({ error: "Missing payload" });
+
+      const decodedData = JSON.parse(Buffer.from(payload, 'base64').toString('utf-8'));
+      const { location, device, referrer, time } = decodedData;
+
+      const message = `
 🚀 *New Portfolio Visit!*
 ━━━━━━━━━━━━━━━━━━━━
 📍 *Location:* ${location || "Unknown"}
@@ -36,9 +39,8 @@ async function startServer() {
 🔗 *Referrer:* ${referrer || "Direct"}
 ⏰ *Time:* ${time}
 ━━━━━━━━━━━━━━━━━━━━
-    `;
+      `;
 
-    try {
       const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -51,22 +53,14 @@ async function startServer() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        if (errorData.error_code === 403) {
-          console.error("❌ TELEGRAM ERROR 403: The bot cannot send you messages yet.");
-          console.error("👉 FIX: Search for your bot on Telegram and click 'START'.");
-          console.error("👉 ALSO: Ensure TELEGRAM_CHAT_ID is YOUR ID, not the bot's ID.");
-          return res.status(403).json({ error: "Bot not started or wrong Chat ID." });
-        } else {
-          console.error("Telegram API Error:", errorData);
-          return res.status(500).json({ error: "Telegram API Error" });
-        }
+        console.error("Telegram API Error:", errorData);
       }
+      
+      res.status(200).json({ status: "ok" });
     } catch (error) {
-      console.error("Failed to send Telegram notification:", error);
-      return res.status(500).json({ error: "Internal Server Error" });
+      console.error("Failed to process system initialization:", error);
+      res.status(500).json({ error: "Internal Server Error" });
     }
-
-    res.status(200).json({ status: "ok" });
   });
 
   // Vite middleware for development

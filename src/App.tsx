@@ -3,7 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { motion } from "motion/react";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { 
   ArrowUpRight, 
   Github, 
@@ -20,7 +21,12 @@ import {
   Search,
   CheckCircle2,
   ArrowDown,
-  User
+  User,
+  Shield,
+  Lock,
+  Eye,
+  HelpCircle,
+  X
 } from "lucide-react";
 
 const SEOPipelineDiagram = () => {
@@ -130,6 +136,73 @@ const SKILLS = [
 ];
 
 export default function App() {
+  const [showPrep, setShowPrep] = useState(false);
+  const [inputBuffer, setInputBuffer] = useState("");
+
+  // Secret "prep" command listener
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const newBuffer = (inputBuffer + e.key.toLowerCase()).slice(-4);
+      setInputBuffer(newBuffer);
+      if (newBuffer === "prep") {
+        setShowPrep(true);
+        setInputBuffer("");
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [inputBuffer]);
+
+  const INTERVIEW_QUESTIONS = [
+    {
+      category: "Spectra (Workflow OS)",
+      questions: [
+        {
+          q: "What is Spectra in simple terms?",
+          a: "It's a single system that replaces Slack, Wrike, and Basecamp. Instead of manually telling people what to do, the system knows the 'recipe' for a project and automatically assigns tasks to the right people in the right order."
+        },
+        {
+          q: "How does it save $15k a year?",
+          a: "By cancelling three different expensive software subscriptions and replacing them with one custom tool that does exactly what the company needs without the extra 'bloat' costs."
+        },
+        {
+          q: "How does it handle 50+ users?",
+          a: "It uses 'Role-Based Access'. This means a designer only sees design tasks, and a manager sees the whole team's progress. It keeps the screen clean for everyone."
+        }
+      ]
+    },
+    {
+      category: "SEO Intelligence Platform",
+      questions: [
+        {
+          q: "How does the deduplication layer work?",
+          a: "If 10 clients track the same keyword, we only pay the API once to check it. We then share that one result with all 10 clients. It's like buying one newspaper for the whole office instead of 10 separate ones."
+        },
+        {
+          q: "What does the 'Orchestrator' actually do?",
+          a: "It's the 'brain'. It looks at the workload and decides how many 'workers' (mini-programs) to start. If there's a lot of work, it starts 20 workers to finish fast; if there's a little, it starts 1 to save resources."
+        },
+        {
+          q: "Why use batch processing instead of real-time?",
+          a: "To save money and stay safe. Checking 50,000 keywords one-by-one is slow and expensive. Doing them in big 'batches' is much cheaper and doesn't get us blocked by the API provider."
+        }
+      ]
+    },
+    {
+      category: "Outreach & Automation",
+      questions: [
+        {
+          q: "How do you stop emails from going to spam?",
+          a: "We verify every email address before sending to make sure it's real. We also 'throttle' the sending speed so we don't look like a robot, which keeps the email providers (like Gmail) happy."
+        },
+        {
+          q: "How do you personalize outreach at scale?",
+          a: "We use 'dynamic variables'. The system automatically pulls the person's name, company, and a specific detail about their website into the email template, so every message feels like it was written by a human."
+        }
+      ]
+    }
+  ];
+
   return (
     <div className="min-h-screen relative selection:bg-emerald-500/30">
       {/* Global Status Bar */}
@@ -173,6 +246,75 @@ export default function App() {
           </a>
         </nav>
       </div>
+
+      {/* Hidden Interview Prep Module */}
+      <AnimatePresence>
+        {showPrep && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-ink/95 backdrop-blur-xl flex items-center justify-center p-6"
+          >
+            <div className="w-full max-w-4xl hardware-card border-emerald-500/50">
+              <div className="hardware-card-content p-8">
+                <div className="flex items-center justify-between mb-8 border-b border-white/10 pb-6">
+                  <div className="flex items-center gap-4">
+                    <div className="p-2 bg-emerald-500/10 rounded-lg">
+                      <Shield className="w-6 h-6 text-emerald-500" />
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-mono uppercase tracking-widest">Interview_Prep_Module</h2>
+                      <p className="micro-label text-emerald-500/60">Status: Restricted_Access_Enabled</p>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={() => setShowPrep(false)}
+                    className="p-2 hover:bg-white/5 rounded-full transition-colors"
+                  >
+                    <X className="w-6 h-6 text-white/40" />
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 overflow-y-auto max-h-[60vh] pr-4 custom-scrollbar">
+                  {INTERVIEW_QUESTIONS.map((group, idx) => (
+                    <div key={idx} className="space-y-6">
+                      <div className="flex items-center gap-2 text-emerald-500 sticky top-0 bg-ink/95 py-2 z-10">
+                        <Zap className="w-4 h-4" />
+                        <span className="micro-label text-emerald-500">{group.category}</span>
+                      </div>
+                      <div className="space-y-6">
+                        {group.questions.map((item, qIdx) => (
+                          <div key={qIdx} className="space-y-3">
+                            <div className="flex gap-3">
+                              <HelpCircle className="w-4 h-4 text-emerald-500 mt-1 flex-shrink-0" />
+                              <p className="text-[11px] font-medium text-white/90 leading-relaxed">
+                                {item.q}
+                              </p>
+                            </div>
+                            <div className="pl-7 border-l border-emerald-500/20">
+                              <p className="text-[10px] text-white/50 leading-relaxed italic">
+                                {item.a}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-12 p-4 bg-emerald-500/5 border border-emerald-500/20 rounded flex items-center gap-4">
+                  <Lock className="w-4 h-4 text-emerald-500" />
+                  <p className="text-[10px] font-mono text-emerald-500/80 uppercase tracking-widest">
+                    Confidential: This module is for internal preparation only. Close before screen sharing.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <main className="max-w-7xl mx-auto px-6 pt-24 md:pt-32 pb-24 relative z-10">
         {/* Hero Section */}

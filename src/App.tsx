@@ -133,20 +133,20 @@ export default function App() {
         />
       </div>
 
-      <main className="max-w-7xl mx-auto px-6 pt-24 pb-32 relative z-10">
+      <main className="max-w-7xl mx-auto px-6 pt-12 md:pt-16 pb-24 relative z-10">
         {/* Hero Section */}
-        <section className="mb-32">
-          <div className="flex items-center gap-3 mb-8">
+        <section className="mb-16 md:mb-20">
+          <div className="flex items-center gap-3 mb-6">
             <div className="status-dot" />
             <span className="micro-label">System Active // Mumbai, IN</span>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
             <div className="lg:col-span-8">
               <motion.h1 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-5xl lg:text-7xl font-medium mb-8 leading-[1.1] tracking-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium mb-6 leading-[1.2] md:leading-[1.15] tracking-tight"
               >
                 I engineer <span className="text-emerald-500">data-intensive systems</span> that automate workflows and operate under real-world constraints.
               </motion.h1>
@@ -155,7 +155,7 @@ export default function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="text-xl text-white/60 max-w-2xl leading-relaxed mb-6"
+                className="text-base md:text-xl text-white/60 max-w-2xl leading-relaxed mb-6"
               >
                 Software Engineer with 1 year of experience building production systems — including 
                 multi-tenant platforms, data pipelines, and CRM systems handling 50K+ records.
@@ -165,10 +165,10 @@ export default function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 }}
-                className="flex items-center gap-3 mb-12"
+                className="flex items-start md:items-center gap-3 mb-8"
               >
-                <div className="h-px w-8 bg-emerald-500/30" />
-                <p className="micro-label text-emerald-500/60">
+                <div className="h-px w-6 md:w-8 bg-emerald-500/30 mt-2 md:mt-0" />
+                <p className="micro-label text-emerald-500/60 text-[8px] sm:text-[9px] leading-relaxed">
                   Building the invisible systems that power large-scale business operations.
                 </p>
               </motion.div>

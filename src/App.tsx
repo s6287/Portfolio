@@ -437,27 +437,44 @@ export default function App() {
     if (!tailoredLatex) return;
     setIsGeneratingPdf(true);
     
-    // Using a public LaTeX compiler API (latexonline.cc)
-    // This allows generating a REAL LaTeX PDF without a local compiler
-    const baseUrl = "https://latexonline.cc/compile";
-    const params = new URLSearchParams({
-      text: tailoredLatex,
-      force: "true"
-    });
-    
-    const compileUrl = `${baseUrl}?${params.toString()}`;
-    
-    // Open in new tab which will trigger the PDF download/view
-    window.open(compileUrl, '_blank');
+    // Using a hidden form to send a POST request to latexonline.cc
+    // This avoids the '414 Request-URI Too Large' error for large LaTeX files
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'https://latexonline.cc/compile';
+    form.target = '_blank';
+
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'text';
+    input.value = tailoredLatex;
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
     
     setTimeout(() => setIsGeneratingPdf(false), 2000);
   };
   const handleTailorResume = async () => {
     if (!jobDescription.trim()) return;
+
+    // Check for API key if not in environment
+    if (!process.env.GEMINI_API_KEY) {
+      const hasKey = await (window as any).aistudio?.hasSelectedApiKey();
+      if (!hasKey) {
+        await (window as any).aistudio?.openSelectKey();
+        // After opening dialog, we assume user will select a key.
+        // The next attempt will use the selected key.
+        return;
+      }
+    }
+
     setIsTailoring(true);
     try {
       const { GoogleGenAI } = await import("@google/genai");
-      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+      // Create a fresh instance to ensure it picks up the latest key
+      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || (process.env as any).API_KEY });
       
       const prompt = `
         You are an expert ATS Resume Optimizer. 

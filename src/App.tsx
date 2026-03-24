@@ -27,7 +27,8 @@ import {
   Eye,
   HelpCircle,
   X,
-  Terminal
+  Terminal,
+  FileText
 } from "lucide-react";
 
 const SEOPipelineDiagram = () => {
@@ -136,6 +137,194 @@ const SKILLS = [
   }
 ];
 
+const RESUME_LATEX_TEMPLATE = `
+% Resume in LaTeX - Shivam Singh (Full Stack Developer)
+\\documentclass[letterpaper,11pt]{article}
+
+\\usepackage{latexsym}
+\\usepackage[empty]{fullpage}
+\\usepackage{titlesec}
+\\usepackage{marvosym}
+\\usepackage[usenames,dvipsnames]{color}
+\\usepackage{verbatim}
+\\usepackage{enumitem}
+\\usepackage[hidelinks]{hyperref}
+\\usepackage{fancyhdr}
+\\usepackage[english]{babel}
+\\usepackage{tabularx}
+\\usepackage{fontawesome5}
+\\usepackage{multicol}
+\\usepackage{xcolor}
+\\setlength{\\multicolsep}{-3.0pt}
+\\setlength{\\columnsep}{-1pt}
+\\input{glyphtounicode}
+
+\\pagestyle{fancy}
+\\fancyhf{}
+\\fancyfoot{}
+\\renewcommand{\\headrulewidth}{0pt}
+\\renewcommand{\\footrulewidth}{0pt}
+
+% Adjust margins
+\\addtolength{\\oddsidemargin}{-0.6in}
+\\addtolength{\\evensidemargin}{-0.5in}
+\\addtolength{\\textwidth}{1.19in}
+\\addtolength{\\topmargin}{-.7in}
+\\addtolength{\\textheight}{1.4in}
+
+\\urlstyle{same}
+
+\\raggedbottom
+\\raggedright
+\\setlength{\\tabcolsep}{0in}
+
+% Define professional color palette
+\\definecolor{primaryblue}{RGB}{0,82,155}
+\\definecolor{accentblue}{RGB}{0,102,204}
+\\definecolor{darkgray}{RGB}{64,64,64}
+\\definecolor{lightgray}{RGB}{128,128,128}
+
+% Sections formatting with color
+\\titleformat{\\section}{
+  \\vspace{-4pt}\\scshape\\raggedright\\large\\bfseries\\color{primaryblue}
+}{}{0em}{}[\\color{primaryblue}\\titlerule \\vspace{-5pt}]
+
+\\pdfgentounicode=1
+
+% Custom commands
+\\newcommand{\\resumeItem}[1]{
+  \\item\\small{
+    {#1 \\vspace{-2pt}}
+  }
+}
+
+\\newcommand{\\resumeSubheading}[4]{
+  \\vspace{-2pt}\\item
+    \\begin{tabular*}{1.0\\textwidth}[t]{l@{\\extracolsep{\\fill}}r}
+      \\textbf{\\color{primaryblue}#1} & \\textbf{\\small\\color{darkgray}#2} \\
+      \\textit{\\small\\color{primaryblue}#3} & \\textit{\\small\\color{darkgray}#4} \\
+    \\end{tabular*}\\vspace{-7pt}
+}
+
+\\newcommand{\\resumeProjectHeading}[2]{
+    \\item
+    \\begin{tabular*}{1.001\\textwidth}{l@{\\extracolsep{\\fill}}r}
+      \\small\\color{primaryblue}#1 & \\textbf{\\small\\color{darkgray}#2}\\
+    \\end{tabular*}\\vspace{-7pt}
+}
+
+\\renewcommand\\labelitemi{\\$\\vcenter{\\hbox{\\tiny\\$\\bullet\\$}}\\$}
+
+\\newcommand{\\resumeSubHeadingListStart}{\\begin{itemize}[leftmargin=0.0in, label={}]}
+\\newcommand{\\resumeSubHeadingListEnd}{\\end{itemize}}
+\\newcommand{\\resumeItemListStart}{\\begin{itemize}}
+\\newcommand{\\resumeItemListEnd}{\\end{itemize}\\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\\begin{document}
+
+%----------HEADING-----------
+\\begin{center}
+    {\\Huge \\scshape\\color{primaryblue} Shivam Singh} \\ \\vspace{3pt}
+    \\small\\color{darkgray}
+    Phone: +91-6287183433 \\;|\\;
+    Email: \\href{mailto:shivamsinghsrs@gmail.com}{shivamsinghsrs@gmail.com} \\;|\\;
+    Location: Mumbai, India \\
+    \\vspace{2pt}
+    LinkedIn: \\href{https://linkedin.com/in/shiivmrajput}{linkedin.com/in/shiivmrajput} \\;|\\;
+    GitHub: \\href{https://github.com/s6287}{github.com/s6287} \\;|\\;
+    Portfolio: \\href{https://ais-dev-jeigl5474v7mevonku2zjy-668497039219.europe-west2.run.app}{[Live Portfolio]}
+\\end{center}
+\\vspace{-8pt}
+
+%-----------PROFESSIONAL SUMMARY-----------
+\\section{Professional Summary}
+\\begin{itemize}[leftmargin=0.15in, label={}]
+    \\small{\\item{
+    Full Stack Developer with 1.9+ years of experience engineering data-intensive systems and automated workflows. Proven track record of delivering high-impact production applications, including a custom Workflow OS that saved \\\$15K+ annually and an SEO pipeline processing 50K+ records per run. Expert in TypeScript, React, and PostgreSQL, with a focus on system reliability, credit optimization, and technical excellence.
+    }}
+\\end{itemize}
+\\vspace{-18pt}
+
+%-----------TECHNICAL SKILLS-----------
+\\section{Technical Skills}
+\\begin{itemize}[leftmargin=0.15in, label={}]
+    \\small{\\item{
+     \\textbf{\\color{darkgray}Languages:} JavaScript (ES6+), TypeScript, SQL, Python, HTML5, CSS3 \\\\
+     \\textbf{\\color{darkgray}Frontend:} React.js, Next.js, TanStack Query, Tailwind CSS, Framer Motion, Redux \\\\
+     \\textbf{\\color{darkgray}Backend:} Node.js, Express.js, Supabase (Edge Functions), RESTful APIs, Webhooks \\\\
+     \\textbf{\\color{darkgray}Databases:} PostgreSQL, Query Optimization, Database Indexing, Row-Level Security (RLS) \\\\
+     \\textbf{\\color{darkgray}Systems:} ETL Pipelines, Cron Automation, Batch Processing, System Design, RBAC \\\\
+     \\textbf{\\color{darkgray}Tools:} Git, GitHub Actions, Vercel, Postman, Docker (Basic), CI/CD
+    }}
+ \\end{itemize}
+ \\vspace{-18pt}
+
+%-----------PROFESSIONAL EXPERIENCE-----------
+\\section{Experience}
+  \\resumeSubHeadingListStart
+    \\resumeSubheading
+      {Associate Web Developer}{July 2024 -- Present}
+      {Rath Infotech}{Mumbai, India}
+      \\resumeItemListStart
+        \\resumeItem{Engineered 3 production-grade systems supporting 50+ daily users while managing enterprise-scale data operations for multiple departments.}
+        \\resumeItem{Architected an automated SEO intelligence platform reclaiming 400+ staff hours annually through high-frequency keyword monitoring and performance insights.}
+        \\resumeItem{Spearheaded a lead intelligence CRM reducing qualification time by 80\\% (12h to 2.5h) for 50K+ records using optimized PostgreSQL indexing.}
+      \\resumeItemListEnd
+  \\resumeSubHeadingListEnd
+\\vspace{-14pt}
+
+%-----------PROJECTS-----------
+\\section{Projects}
+    \\vspace{-5pt}
+    \\resumeSubHeadingListStart
+    
+      \\resumeProjectHeading
+          {\\textbf{Spectra — Multi-tenant Workflow Operating System}}{}
+          \\resumeItemListStart
+            \\resumeItem{\\textbf{\\color{darkgray}Technologies:} React, Node.js, PostgreSQL, Supabase, RBAC}
+            \\resumeItem{Replaced Slack, Wrike, and Basecamp with a custom internal system, achieving \\textbf{\\\$15K+ in annual subscription savings} for a multi-department organization.}
+            \\resumeItem{Built a skill-based task routing engine with \\textbf{70\\% auto-assignment rate} across 7 departments, eliminating manual distribution overhead.}
+            \\resumeItem{Implemented granular RBAC for 50+ users, ensuring strict data lineage and automated handoffs between SEO and Web Development teams.}
+          \\resumeItemListEnd
+          \\vspace{-15pt}
+    
+      \\resumeProjectHeading
+          {\\textbf{SEO Intelligence \\& Ranking Pipeline}}{}
+          \\resumeItemListStart
+            \\resumeItem{\\textbf{\\color{darkgray}Technologies:} Supabase Edge Functions, PostgreSQL, DataForSEO API, Cron}
+            \\resumeItem{Developed a high-frequency pipeline processing \\textbf{50K+ keywords in under 10 minutes} using dynamic worker scaling and parallel execution.}
+            \\resumeItem{Engineered an intelligent deduplication layer that identifies unique keywords across client projects, reducing API credit spend by \\textbf{40\\% (\\\$2K+ annually)}.}
+            \\resumeItem{Orchestrated a webhook-driven ETL pipeline with cron triggers for real-time data synchronization and persistent storage in PostgreSQL.}
+          \\resumeItemListEnd
+          \\vspace{-13pt}
+          
+      \\resumeProjectHeading
+          {\\textbf{CGAI CRM — Identity Resolution Platform}}{}
+          \\resumeItemListStart
+            \\resumeItem{\\textbf{\\color{darkgray}Technologies:} React, Node.js, PostgreSQL, Fuzzy Matching Algorithms}
+            \\resumeItem{Built a production-grade CRM managing \\textbf{50K+ attendee records} with \\textbf{92\\% accuracy} in identity resolution using fuzzy matching and indexed lookups.}
+            \\resumeItem{Optimized database-level deduplication and batch processing (500-row chunks) to prevent statement timeouts during massive event data imports.}
+            \\resumeItem{Developed a field-level audit trail system for complete data lineage and a predictive lead scoring model that \\textbf{boosted sales win rates by 25\\%}.}
+          \\resumeItemListEnd
+          \\vspace{-13pt}
+    \\resumeSubHeadingListEnd
+\\vspace{-2pt}
+
+%-----------EDUCATION-----------
+\\section{Education}
+  \\resumeSubHeadingListStart
+    
+    \\resumeSubheading
+      {Bachelor of Science in Computer Science, SGPA: 8.58/10.0}{2021 -- 2024}
+      {University of Mumbai}{Mumbai, India}
+  \\resumeSubHeadingListEnd
+
+\\end{document}
+`;
+
 export default function App() {
   const [showPrep, setShowPrep] = useState(false);
   const [inputBuffer, setInputBuffer] = useState("");
@@ -238,6 +427,69 @@ export default function App() {
     }
   ];
 
+  const [activeTab, setActiveTab] = useState<"prep" | "tailor">("prep");
+  const [jobDescription, setJobDescription] = useState("");
+  const [tailoredLatex, setTailoredLatex] = useState("");
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+
+  const handleGeneratePdf = () => {
+    if (!tailoredLatex) return;
+    setIsGeneratingPdf(true);
+    
+    // Using a public LaTeX compiler API (latexonline.cc)
+    // This allows generating a REAL LaTeX PDF without a local compiler
+    const baseUrl = "https://latexonline.cc/compile";
+    const params = new URLSearchParams({
+      text: tailoredLatex,
+      force: "true"
+    });
+    
+    const compileUrl = `${baseUrl}?${params.toString()}`;
+    
+    // Open in new tab which will trigger the PDF download/view
+    window.open(compileUrl, '_blank');
+    
+    setTimeout(() => setIsGeneratingPdf(false), 2000);
+  };
+  const handleTailorResume = async () => {
+    if (!jobDescription.trim()) return;
+    setIsTailoring(true);
+    try {
+      const { GoogleGenAI } = await import("@google/genai");
+      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+      
+      const prompt = `
+        You are an expert ATS Resume Optimizer. 
+        I am giving you a LaTeX resume and a Job Description (JD).
+        Your task is to rewrite the LaTeX resume to perfectly match the JD while keeping the facts true.
+        
+        RULES:
+        1. Keep the LaTeX structure EXACTLY as provided.
+        2. Highlight keywords from the JD in the Professional Summary and Experience bullet points.
+        3. Ensure the quantifiable metrics ($15K savings, 50K keywords, etc.) are preserved but framed to match the JD's goals.
+        4. Return ONLY the LaTeX code. No conversational text.
+        
+        RESUME LATEX:
+        ${RESUME_LATEX_TEMPLATE}
+        
+        JOB DESCRIPTION:
+        ${jobDescription}
+      `;
+
+      const response = await ai.models.generateContent({
+        model: "gemini-3-flash-preview",
+        contents: prompt,
+      });
+
+      setTailoredLatex(response.text || "");
+    } catch (error) {
+      console.error("Tailoring failed:", error);
+      alert("System error during optimization. Check API key.");
+    } finally {
+      setIsTailoring(false);
+    }
+  };
+
   return (
     <div className="min-h-screen relative selection:bg-emerald-500/30">
       {/* Global Status Bar */}
@@ -299,8 +551,21 @@ export default function App() {
                       <Shield className="w-6 h-6 text-emerald-500" />
                     </div>
                     <div>
-                      <h2 className="text-xl font-mono uppercase tracking-widest">Interview_Prep_Module</h2>
-                      <p className="micro-label text-emerald-500/60">Status: Restricted_Access_Enabled</p>
+                      <h2 className="text-xl font-mono uppercase tracking-widest">System_Access_Restricted</h2>
+                      <div className="flex gap-4 mt-2">
+                        <button 
+                          onClick={() => setActiveTab("prep")}
+                          className={`micro-label px-3 py-1 rounded transition-colors ${activeTab === 'prep' ? 'bg-emerald-500 text-black' : 'text-white/40 hover:text-white'}`}
+                        >
+                          Interview_Prep
+                        </button>
+                        <button 
+                          onClick={() => setActiveTab("tailor")}
+                          className={`micro-label px-3 py-1 rounded transition-colors ${activeTab === 'tailor' ? 'bg-emerald-500 text-black' : 'text-white/40 hover:text-white'}`}
+                        >
+                          Resume_Tailor_v1.0
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <div className="flex gap-4">
@@ -313,33 +578,101 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 overflow-y-auto max-h-[60vh] pr-4 custom-scrollbar">
-                  {INTERVIEW_QUESTIONS.map((group, idx) => (
-                    <div key={idx} className="space-y-6">
-                      <div className="flex items-center gap-2 text-emerald-500 sticky top-0 bg-ink/95 py-2 z-10">
-                        <Zap className="w-4 h-4" />
-                        <span className="micro-label text-emerald-500">{group.category}</span>
+                {activeTab === "prep" ? (
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 overflow-y-auto max-h-[60vh] pr-4 custom-scrollbar">
+                    {INTERVIEW_QUESTIONS.map((group, idx) => (
+                      <div key={idx} className="space-y-6">
+                        <div className="flex items-center gap-2 text-emerald-500 sticky top-0 bg-ink/95 py-2 z-10">
+                          <Zap className="w-4 h-4" />
+                          <span className="micro-label text-emerald-500">{group.category}</span>
+                        </div>
+                        <div className="space-y-6">
+                          {group.questions.map((item, qIdx) => (
+                            <div key={qIdx} className="space-y-3">
+                              <div className="flex gap-3">
+                                <HelpCircle className="w-4 h-4 text-emerald-500 mt-1 flex-shrink-0" />
+                                <p className="text-[11px] font-medium text-white/90 leading-relaxed">
+                                  {item.q}
+                                </p>
+                              </div>
+                              <div className="pl-7 border-l border-emerald-500/20">
+                                <p className="text-[10px] text-white/50 leading-relaxed italic">
+                                  {item.a}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                      <div className="space-y-6">
-                        {group.questions.map((item, qIdx) => (
-                          <div key={qIdx} className="space-y-3">
-                            <div className="flex gap-3">
-                              <HelpCircle className="w-4 h-4 text-emerald-500 mt-1 flex-shrink-0" />
-                              <p className="text-[11px] font-medium text-white/90 leading-relaxed">
-                                {item.q}
-                              </p>
-                            </div>
-                            <div className="pl-7 border-l border-emerald-500/20">
-                              <p className="text-[10px] text-white/50 leading-relaxed italic">
-                                {item.a}
-                              </p>
-                            </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 overflow-y-auto max-h-[60vh] pr-4 custom-scrollbar">
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-2 text-emerald-500">
+                        <Code2 className="w-4 h-4" />
+                        <span className="micro-label">Input_Job_Description</span>
+                      </div>
+                      <textarea 
+                        value={jobDescription}
+                        onChange={(e) => setJobDescription(e.target.value)}
+                        placeholder="Paste the Job Description here..."
+                        className="w-full h-[40vh] bg-white/5 border border-white/10 rounded p-4 text-[11px] font-mono text-white/80 focus:border-emerald-500/50 outline-none resize-none"
+                      />
+                      <button 
+                        onClick={handleTailorResume}
+                        disabled={isTailoring || !jobDescription}
+                        className="w-full py-3 bg-emerald-500 text-black font-mono text-xs uppercase tracking-widest hover:bg-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      >
+                        {isTailoring ? "Optimizing_System..." : "Tailor_LaTeX_Resume"}
+                      </button>
+                    </div>
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between text-emerald-500">
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-4 h-4" />
+                          <span className="micro-label">Optimized_LaTeX_Output</span>
+                        </div>
+                        <div className="flex gap-4">
+                          {tailoredLatex && (
+                            <>
+                              <button 
+                                onClick={handleGeneratePdf}
+                                disabled={isGeneratingPdf}
+                                className="text-[9px] uppercase tracking-widest text-emerald-500 hover:text-white transition-colors flex items-center gap-1"
+                              >
+                                <FileText className="w-3 h-3" />
+                                [{isGeneratingPdf ? "Compiling..." : "Download_PDF"}]
+                              </button>
+                              <button 
+                                onClick={() => {
+                                  navigator.clipboard.writeText(tailoredLatex);
+                                  alert("LaTeX copied to clipboard!");
+                                }}
+                                className="text-[9px] uppercase tracking-widest hover:text-white transition-colors"
+                              >
+                                [Copy_Code]
+                              </button>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                      <div className="w-full h-[40vh] bg-black/50 border border-white/10 rounded p-4 overflow-auto custom-scrollbar">
+                        {tailoredLatex ? (
+                          <pre className="text-[9px] font-mono text-emerald-500/80 leading-relaxed whitespace-pre-wrap">
+                            {tailoredLatex}
+                          </pre>
+                        ) : (
+                          <div className="h-full flex flex-col items-center justify-center text-white/20 text-center p-8">
+                            <Workflow className="w-8 h-8 mb-4 opacity-20" />
+                            <p className="text-[10px] uppercase tracking-[0.2em]">Waiting_for_Input</p>
+                            <p className="text-[9px] mt-2 opacity-50">Paste a JD and click Tailor to generate optimized LaTeX code.</p>
                           </div>
-                        ))}
+                        )}
                       </div>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                )}
 
                 <div className="mt-12 p-4 bg-emerald-500/5 border border-emerald-500/20 rounded flex items-center gap-4">
                   <Lock className="w-4 h-4 text-emerald-500" />

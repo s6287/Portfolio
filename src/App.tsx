@@ -430,6 +430,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<"prep" | "tailor">("prep");
   const [jobDescription, setJobDescription] = useState("");
   const [tailoredLatex, setTailoredLatex] = useState("");
+  const [isTailoring, setIsTailoring] = useState(false);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
 
   const handleGeneratePdf = () => {

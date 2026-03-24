@@ -28,7 +28,8 @@ import {
   HelpCircle,
   X,
   Terminal,
-  FileText
+  FileText,
+  Download
 } from "lucide-react";
 
 const SEOPipelineDiagram = () => {
@@ -433,22 +434,48 @@ export default function App() {
   const [isTailoring, setIsTailoring] = useState(false);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
 
+  const handleDownloadTex = () => {
+    if (!tailoredLatex) return;
+    const blob = new Blob([tailoredLatex], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'resume_optimized.tex';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   const handleGeneratePdf = () => {
     if (!tailoredLatex) return;
     setIsGeneratingPdf(true);
     
-    // Using a hidden form to send a POST request to latex.online
-    // This avoids the '414 Request-URI Too Large' error and uses the correct endpoint
+    // Using a hidden form to send a POST request to texlive.net
+    // This is a very stable alternative to latex.online
     const form = document.createElement('form');
     form.method = 'POST';
-    form.action = 'https://latex.online/compile';
+    form.action = 'https://texlive.net/cgi-bin/latexcgi';
     form.target = '_blank';
 
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = 'text';
-    input.value = tailoredLatex;
-    form.appendChild(input);
+    // texlive.net expects 'filecontents[]' and 'filename[]'
+    const inputContent = document.createElement('input');
+    inputContent.type = 'hidden';
+    inputContent.name = 'filecontents[]';
+    inputContent.value = tailoredLatex;
+    form.appendChild(inputContent);
+
+    const inputName = document.createElement('input');
+    inputName.type = 'hidden';
+    inputName.name = 'filename[]';
+    inputName.value = 'resume.tex';
+    form.appendChild(inputName);
+
+    const inputEngine = document.createElement('input');
+    inputEngine.type = 'hidden';
+    inputEngine.name = 'engine';
+    inputEngine.value = 'pdflatex';
+    form.appendChild(inputEngine);
 
     document.body.appendChild(form);
     form.submit();
@@ -658,9 +685,18 @@ export default function App() {
                                 onClick={handleGeneratePdf}
                                 disabled={isGeneratingPdf}
                                 className="text-[9px] uppercase tracking-widest text-emerald-500 hover:text-white transition-colors flex items-center gap-1"
+                                title="Generate PDF using Online Compiler"
                               >
                                 <FileText className="w-3 h-3" />
-                                [{isGeneratingPdf ? "Compiling..." : "Download_PDF"}]
+                                [{isGeneratingPdf ? "Compiling..." : "Generate_PDF"}]
+                              </button>
+                              <button 
+                                onClick={handleDownloadTex}
+                                className="text-[9px] uppercase tracking-widest text-emerald-500 hover:text-white transition-colors flex items-center gap-1"
+                                title="Download .tex file to use in Overleaf"
+                              >
+                                <Download className="w-3 h-3" />
+                                [Download_.tex]
                               </button>
                               <button 
                                 onClick={() => {

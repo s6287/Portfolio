@@ -437,11 +437,11 @@ export default function App() {
     if (!tailoredLatex) return;
     setIsGeneratingPdf(true);
     
-    // Using a hidden form to send a POST request to latexonline.cc
-    // This avoids the '414 Request-URI Too Large' error for large LaTeX files
+    // Using a hidden form to send a POST request to latex.online
+    // This avoids the '414 Request-URI Too Large' error and uses the correct endpoint
     const form = document.createElement('form');
     form.method = 'POST';
-    form.action = 'https://latexonline.cc/compile';
+    form.action = 'https://latex.online/compile';
     form.target = '_blank';
 
     const input = document.createElement('input');

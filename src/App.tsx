@@ -29,7 +29,8 @@ import {
   X,
   Terminal,
   FileText,
-  Download
+  Download,
+  ExternalLink
 } from "lucide-react";
 
 const SEOPipelineDiagram = () => {
@@ -157,11 +158,11 @@ const RESUME_LATEX_TEMPLATE = `
 \\usepackage[english]{babel}
 \\usepackage{tabularx}
 \\usepackage{fontawesome5}
-\\usepackage{multicol}
-\\usepackage{xcolor}
-\\setlength{\\multicolsep}{-3.0pt}
-\\setlength{\\columnsep}{-1pt}
 \\input{glyphtounicode}
+
+% Use Charter font for a professional, modern look
+\\usepackage[bitstream-charter]{mathdesign}
+\\usepackage[T1]{fontenc}
 
 \\pagestyle{fancy}
 \\fancyhf{}
@@ -169,12 +170,12 @@ const RESUME_LATEX_TEMPLATE = `
 \\renewcommand{\\headrulewidth}{0pt}
 \\renewcommand{\\footrulewidth}{0pt}
 
-% Adjust margins
-\\addtolength{\\oddsidemargin}{-0.6in}
+% Adjust margins for a balanced, professional layout
+\\addtolength{\\oddsidemargin}{-0.5in}
 \\addtolength{\\evensidemargin}{-0.5in}
-\\addtolength{\\textwidth}{1.19in}
-\\addtolength{\\topmargin}{-.7in}
-\\addtolength{\\textheight}{1.4in}
+\\addtolength{\\textwidth}{1in}
+\\addtolength{\\topmargin}{-.5in}
+\\addtolength{\\textheight}{1.0in}
 
 \\urlstyle{same}
 
@@ -182,16 +183,10 @@ const RESUME_LATEX_TEMPLATE = `
 \\raggedright
 \\setlength{\\tabcolsep}{0in}
 
-% Define professional color palette
-\\definecolor{primaryblue}{RGB}{0,82,155}
-\\definecolor{accentblue}{RGB}{0,102,204}
-\\definecolor{darkgray}{RGB}{64,64,64}
-\\definecolor{lightgray}{RGB}{128,128,128}
-
-% Sections formatting with color
+% Sections formatting - Minimalist black and white
 \\titleformat{\\section}{
-  \\vspace{-4pt}\\scshape\\raggedright\\large\\bfseries\\color{primaryblue}
-}{}{0em}{}[\\color{primaryblue}\\titlerule \\vspace{-5pt}]
+  \\vspace{-4pt}\\scshape\\raggedright\\large\\bfseries
+}{}{0em}{}[\\titlerule \\vspace{-5pt}]
 
 \\pdfgentounicode=1
 
@@ -204,22 +199,22 @@ const RESUME_LATEX_TEMPLATE = `
 
 \\newcommand{\\resumeSubheading}[4]{
   \\vspace{-2pt}\\item
-    \\begin{tabular*}{1.0\\textwidth}[t]{l@{\\extracolsep{\\fill}}r}
-      \\textbf{\\color{primaryblue}#1} & \\textbf{\\small\\color{darkgray}#2} \\
-      \\textit{\\small\\color{primaryblue}#3} & \\textit{\\small\\color{darkgray}#4} \\
-    \\end{tabular*}\\vspace{-7pt}
+    \\begin{tabular*}{0.97\\textwidth}[t]{l@{\\extracolsep{\\fill}}r}
+      \\textbf{#1} & #2 \\\\
+      \\textit{\\small#3} & \\textit{\\small #4} \\\\
+    \end{tabular*}\\vspace{-7pt}
 }
 
 \\newcommand{\\resumeProjectHeading}[2]{
     \\item
-    \\begin{tabular*}{1.001\\textwidth}{l@{\\extracolsep{\\fill}}r}
-      \\small\\color{primaryblue}#1 & \\textbf{\\small\\color{darkgray}#2}\\
-    \\end{tabular*}\\vspace{-7pt}
+    \\begin{tabular*}{0.97\\textwidth}{l@{\\extracolsep{\\fill}}r}
+      \\small#1 & #2 \\\\
+    \end{tabular*}\\vspace{-7pt}
 }
 
-\\renewcommand\\labelitemi{\\$\\vcenter{\\hbox{\\tiny\\$\\bullet\\$}}\\$}
+\\renewcommand\\labelitemi{$\\vcenter{\\hbox{\\tiny$\\bullet$}}$}
 
-\\newcommand{\\resumeSubHeadingListStart}{\\begin{itemize}[leftmargin=0.0in, label={}]}
+\\newcommand{\\resumeSubHeadingListStart}{\\begin{itemize}[leftmargin=0.15in, label={}]}
 \\newcommand{\\resumeSubHeadingListEnd}{\\end{itemize}}
 \\newcommand{\\resumeItemListStart}{\\begin{itemize}}
 \\newcommand{\\resumeItemListEnd}{\\end{itemize}\\vspace{-5pt}}
@@ -231,35 +226,33 @@ const RESUME_LATEX_TEMPLATE = `
 
 %----------HEADING-----------
 \\begin{center}
-    {\\Huge \\scshape\\color{primaryblue} Shivam Singh} \\\\ \\vspace{2pt}
-    \\small\\color{darkgray}
-    Mumbai, India $|$ +91-6287183433 $|$ \\href{mailto:shivamsinghsrs@gmail.com}{shivamsinghsrs@gmail.com} \\\\
-    \\href{https://linkedin.com/in/shiivmrajput}{LinkedIn: shiivmrajput} $|$ \\href{https://github.com/s6287}{GitHub: s6287} $|$ \\href{https://shivam-singh-omega.vercel.app}{Portfolio: shivam-singh-omega}
+    \\textbf{\\Huge \\scshape Shivam Singh} \\\\ \\vspace{1pt}
+    \\small Mumbai, India $|$ +91-6287183433 $|$ \\href{mailto:shivamsinghsrs@gmail.com}{shivamsinghsrs@gmail.com} \\\\
+    \\href{https://linkedin.com/in/shiivmrajput}{linkedin.com/in/shiivmrajput} $|$ \\href{https://github.com/s6287}{github.com/s6287} $|$ \\href{https://shivam-singh-omega.vercel.app}{shivam-singh-omega.vercel.app}
 \\end{center}
-\\vspace{-10pt}
 
 %-----------PROFESSIONAL SUMMARY-----------
 \\section{Professional Summary}
 \\begin{itemize}[leftmargin=0.15in, label={}]
     \\small{\\item{
-    Full Stack Developer with 1.9+ years of experience engineering data-intensive systems and automated workflows. Proven track record of delivering high-impact production applications, including a custom Workflow OS saving \\textbf{\\\$15K+ annually} and an SEO pipeline processing \\textbf{50K+ records per run}. Expert in TypeScript, React, and PostgreSQL, with a focus on system reliability, credit optimization, and technical excellence.
+    Full Stack Developer with 1.9+ years of experience engineering data-intensive systems and automated workflows. Proven track record of delivering high-impact production applications, including a custom Workflow OS saving \\textbf{\\$15K+ annually} and an SEO pipeline processing \\textbf{50K+ records per run}. Expert in TypeScript, React, and PostgreSQL, with a focus on system reliability, credit optimization, and technical excellence.
     }}
 \\end{itemize}
-\\vspace{-18pt}
+\\vspace{-15pt}
 
 %-----------TECHNICAL SKILLS-----------
 \\section{Technical Skills}
-\\begin{itemize}[leftmargin=0.15in, label={}]
+ \\begin{itemize}[leftmargin=0.15in, label={}]
     \\small{\\item{
-     \\textbf{\\color{darkgray}Languages:} JavaScript (ES6+), TypeScript, SQL, Python, HTML5, CSS3 \\\\
-     \\textbf{\\color{darkgray}Frontend:} React.js, Next.js, TanStack Query, Tailwind CSS, Framer Motion, Redux \\\\
-     \\textbf{\\color{darkgray}Backend:} Node.js, Express.js, Supabase (Edge Functions), RESTful APIs, Webhooks \\\\
-     \\textbf{\\color{darkgray}Databases:} PostgreSQL, Query Optimization, Database Indexing, Row-Level Security (RLS) \\\\
-     \\textbf{\\color{darkgray}Systems:} ETL Pipelines, Cron Automation, Batch Processing, System Design, RBAC \\\\
-     \\textbf{\\color{darkgray}Tools:} Git, GitHub Actions, Vercel, Postman, Docker (Basic), CI/CD
+     \\textbf{Languages}{: JavaScript (ES6+), TypeScript, SQL, Python, HTML5, CSS3} \\\\
+     \\textbf{Frontend}{: React.js, Next.js, TanStack Query, Tailwind CSS, Framer Motion, Redux} \\\\
+     \\textbf{Backend}{: Node.js, Express.js, Supabase (Edge Functions), RESTful APIs, Webhooks} \\\\
+     \\textbf{Databases}{: PostgreSQL, Query Optimization, Database Indexing, Row-Level Security (RLS)} \\\\
+     \\textbf{Systems}{: ETL Pipelines, Cron Automation, Batch Processing, System Design, RBAC} \\\\
+     \\textbf{Tools}{: Git, GitHub Actions, Vercel, Postman, Docker (Basic), CI/CD}
     }}
  \\end{itemize}
- \\vspace{-18pt}
+ \\vspace{-15pt}
 
 %-----------PROFESSIONAL EXPERIENCE-----------
 \\section{Experience}
@@ -269,8 +262,8 @@ const RESUME_LATEX_TEMPLATE = `
       {Rath Infotech}{Mumbai, India}
       \\resumeItemListStart
         \\resumeItem{Owned full-stack development across 3 production systems supporting 50+ daily users, managing end-to-end engineering from React UIs to Node.js APIs and PostgreSQL schema modelling.}
-        \\resumeItem{Architected a skill-based task routing engine that automated \\textbf{70\\% of manual assignments}, replacing a fragmented multi-tool workflow and saving the organisation \\textbf{\\\$15K+ annually}.}
-        \\resumeItem{Developed a high-frequency keyword ranking pipeline processing \\textbf{50K+ records per run} with intelligent deduplication logic, cutting redundant API calls by 40\\% and saving \\textbf{\\\$2K+ in annual API costs}.}
+        \\resumeItem{Architected a skill-based task routing engine that automated \\textbf{70\\% of manual assignments}, replacing a fragmented multi-tool workflow and saving the organisation \\textbf{\\$15K+ annually}.}
+        \\resumeItem{Developed a high-frequency keyword ranking pipeline processing \\textbf{50K+ records per run} with intelligent deduplication logic, cutting redundant API calls by 40\\% and saving \\textbf{\\$2K+ in annual API costs}.}
         \\resumeItem{Engineered a React dashboard with real-time data visualisation and bulk Excel import (10K+ rows), reducing lead qualification time from \\textbf{12 hours to 2.5 hours} for the sales team.}
       \\resumeItemListEnd
   \\resumeSubHeadingListEnd
@@ -278,35 +271,28 @@ const RESUME_LATEX_TEMPLATE = `
 
 %-----------PROJECTS-----------
 \\section{Projects}
-    \\vspace{-5pt}
     \\resumeSubHeadingListStart
-    
       \\resumeProjectHeading
-          {\\textbf{Spectra — Intelligent Workflow Management System}}{}
+          {\\textbf{Spectra — Intelligent Workflow Management System} $|$ \\emph{React, Node.js, PostgreSQL}}{}
           \\resumeItemListStart
-            \\resumeItem{Architected a multi-tenant SaaS platform from scratch, consolidating 3 subscriptions (Slack, Wrike, Basecamp) into a single internal system, delivering \\textbf{\\\$15K+ annual savings}.}
+            \\resumeItem{Architected a multi-tenant SaaS platform from scratch, consolidating 3 subscriptions (Slack, Wrike, Basecamp) into a single internal system, delivering \\textbf{\\$15K+ annual savings}.}
             \\resumeItem{Implemented a skill-based task routing engine that automatically assigns tasks across departments in sequence (e.g. SEO $\\rightarrow$ Dev $\\rightarrow$ CRM), achieving a \\textbf{70\\% auto-assignment rate}.}
             \\resumeItem{Designed granular RBAC for 50+ users across 7 departments, ensuring strict data lineage and automated handoffs between technical and creative teams.}
           \\resumeItemListEnd
-          \\vspace{-15pt}
-    
       \\resumeProjectHeading
-          {\\textbf{RankSense — SEO Rank Tracking Platform}}{}
+          {\\textbf{RankSense — SEO Rank Tracking Platform} $|$ \\emph{Next.js, Supabase, TypeScript}}{}
           \\resumeItemListStart
             \\resumeItem{Designed a distributed keyword ranking pipeline using a dynamic worker pool (1--20 concurrent workers) calibrated against API rate limits and Supabase Edge Function constraints.}
-            \\resumeItem{Built a deduplication layer that separates unique from duplicate keywords before API calls, reducing credit spend by \\textbf{40\\% (\\\$2K+ saved annually)}.}
+            \\resumeItem{Built a deduplication layer that separates unique from duplicate keywords before API calls, reducing credit spend by \\textbf{40\\% (\\$2K+ saved annually)}.}
             \\resumeItem{Orchestrated a webhook-driven ETL pipeline with cron triggers for real-time data synchronization, processing \\textbf{50K+ keywords per run} in under 10 minutes.}
           \\resumeItemListEnd
-          \\vspace{-15pt}
-          
       \\resumeProjectHeading
-          {\\textbf{AttenView — Attendee Insights Dashboard}}{}
+          {\\textbf{AttenView — Attendee Insights Dashboard} $|$ \\emph{React, Node.js, PostgreSQL}}{}
           \\resumeItemListStart
             \\resumeItem{Built a production-grade CRM managing \\textbf{50K+ attendee records} with \\textbf{92\\% accuracy} in identity resolution using fuzzy matching and indexed lookups in PostgreSQL.}
             \\resumeItem{Optimized database-level deduplication and batch processing (500-row chunks) to prevent statement timeouts during massive event data imports.}
             \\resumeItem{Developed a predictive lead scoring model that reduced lead qualification time by 80\\% and \\textbf{boosted sales win rates by 25\\%}.}
           \\resumeItemListEnd
-          \\vspace{-13pt}
     \\resumeSubHeadingListEnd
 \\vspace{-2pt}
 
@@ -314,8 +300,8 @@ const RESUME_LATEX_TEMPLATE = `
 \\section{Education}
   \\resumeSubHeadingListStart
     \\resumeSubheading
-      {Bachelor of Science in Computer Science, SGPA: 8.58/10.0}{2021 -- 2024}
       {University of Mumbai}{Mumbai, India}
+      {Bachelor of Science in Computer Science (SGPA: 8.58/10.0)}{2021 -- 2024}
   \\resumeSubHeadingListEnd
 
 \\end{document}
@@ -562,6 +548,10 @@ export default function App() {
           <a href="#approach" className="nav-link group">
             <Workflow className="w-3 h-3 group-hover:text-emerald-400 transition-colors" />
             <span className="hidden sm:inline">Approach</span>
+          </a>
+          <a href="#resume" className="nav-link group">
+            <FileText className="w-3 h-3 group-hover:text-emerald-400 transition-colors" />
+            <span className="hidden sm:inline">Resume</span>
           </a>
           <a href="#contact" className="nav-link-primary group">
             <Mail className="w-3 h-3 group-hover:scale-110 transition-transform" />
@@ -1042,6 +1032,81 @@ export default function App() {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Resume Section */}
+        <section id="resume" className="mb-32">
+          <div className="hardware-card border-l-4 border-l-emerald-500 tactile-card dot-grid overflow-hidden">
+            <div className="hardware-card-content p-8 md:p-12">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div className="lg:col-span-7">
+                  <div className="micro-label mb-4">Section_04</div>
+                  <h2 className="text-4xl font-medium mb-6">Professional Credentials</h2>
+                  <p className="text-white/60 leading-relaxed mb-8 max-w-xl">
+                    My professional journey is documented in a comprehensive resume that highlights my technical expertise, 
+                    project impact, and engineering philosophy. Download the latest version for a detailed overview of my 
+                    experience and achievements.
+                  </p>
+                  <div className="flex flex-wrap gap-4">
+                    <a 
+                      href="https://drive.google.com/uc?export=download&id=1POexUhK0D3Vzvopldo8ga4H7FtmHP8OT" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="px-8 py-4 bg-emerald-500 text-black font-medium hover:bg-emerald-400 transition-colors flex flex-col items-center gap-1 group"
+                    >
+                      <div className="flex items-center gap-2">
+                        Download_Resume_v1.0
+                        <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+                      </div>
+                      <span className="text-[8px] uppercase tracking-widest opacity-60">(Direct Download)</span>
+                    </a>
+                    <a 
+                      href="https://drive.google.com/file/d/1POexUhK0D3Vzvopldo8ga4H7FtmHP8OT/view?usp=drive_link" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="px-8 py-4 border border-white/10 hover:bg-white/5 transition-colors flex flex-col items-center gap-1 group"
+                    >
+                      <div className="flex items-center gap-2">
+                        View_Online
+                        <ExternalLink className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                      </div>
+                      <span className="text-[8px] uppercase tracking-widest opacity-40">(Google Drive)</span>
+                    </a>
+                  </div>
+                </div>
+                <div className="lg:col-span-5 hidden lg:block">
+                  <div className="relative group">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 to-blue-500/20 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                    <div className="relative bg-ink border border-white/10 p-8 rounded-lg">
+                      <div className="flex items-center justify-between mb-8">
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                          <span className="micro-label text-emerald-500">System_Status: Verified</span>
+                        </div>
+                        <FileText className="w-5 h-5 text-white/20" />
+                      </div>
+                      <div className="space-y-4">
+                        <div className="h-2 w-full bg-white/5 rounded"></div>
+                        <div className="h-2 w-3/4 bg-white/5 rounded"></div>
+                        <div className="h-2 w-5/6 bg-white/5 rounded"></div>
+                        <div className="h-2 w-1/2 bg-white/5 rounded"></div>
+                      </div>
+                      <div className="mt-8 pt-8 border-t border-white/5 flex items-center justify-between">
+                        <div className="flex flex-col">
+                          <span className="text-[10px] font-mono text-white/40 uppercase">Format</span>
+                          <span className="text-[11px] font-mono text-emerald-500">PDF_DOCX</span>
+                        </div>
+                        <div className="flex flex-col items-end">
+                          <span className="text-[10px] font-mono text-white/40 uppercase">Last_Updated</span>
+                          <span className="text-[11px] font-mono text-emerald-500">MAR_2026</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 

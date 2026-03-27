@@ -124,17 +124,20 @@ const SKILLS = [
   {
     category: "Backend & Systems",
     items: ["Node.js", "PostgreSQL", "Supabase", "RESTful APIs", "Batch Processing", "ETL Pipelines", "Edge Functions", "Cron Automation", "Row-Level Security", "Query Optimisation"],
-    icon: <Database className="w-5 h-5 text-blue-400" />
+    icon: <Database className="w-5 h-5 text-blue-400" />,
+    color: "blue"
   },
   {
     category: "Frontend",
     items: ["React", "Next.js", "TypeScript", "TanStack Query", "Tailwind CSS"],
-    icon: <Code2 className="w-5 h-5 text-purple-400" />
+    icon: <Code2 className="w-5 h-5 text-purple-400" />,
+    color: "purple"
   },
   {
     category: "Core_Infrastructure",
     items: ["Node.js", "React", "TypeScript", "PostgreSQL", "Supabase", "Next.js", "System design for data-heavy workflows"],
-    icon: <Server className="w-5 h-5 text-emerald-400" />
+    icon: <Server className="w-5 h-5 text-emerald-400" />,
+    color: "emerald"
   }
 ];
 
@@ -434,19 +437,6 @@ export default function App() {
   const [isTailoring, setIsTailoring] = useState(false);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
 
-  const handleDownloadTex = () => {
-    if (!tailoredLatex) return;
-    const blob = new Blob([tailoredLatex], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'resume_optimized.tex';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
-
   const handleGeneratePdf = () => {
     if (!tailoredLatex) return;
     setIsGeneratingPdf(true);
@@ -457,6 +447,8 @@ export default function App() {
     form.method = 'POST';
     form.action = 'https://texlive.net/cgi-bin/latexcgi';
     form.target = '_blank';
+    form.setAttribute('enctype', 'multipart/form-data');
+    form.encoding = 'multipart/form-data';
 
     // texlive.net expects 'filecontents[]' and 'filename[]'
     const inputContent = document.createElement('input');
@@ -476,6 +468,12 @@ export default function App() {
     inputEngine.name = 'engine';
     inputEngine.value = 'pdflatex';
     form.appendChild(inputEngine);
+
+    const inputReturn = document.createElement('input');
+    inputReturn.type = 'hidden';
+    inputReturn.name = 'return';
+    inputReturn.value = 'pdf';
+    form.appendChild(inputReturn);
 
     document.body.appendChild(form);
     form.submit();
@@ -537,6 +535,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen relative selection:bg-emerald-500/30">
+      {/* Immersive Scanline */}
+      <div className="scanline" />
+      
       {/* Global Status Bar */}
       <div className="fixed top-0 left-0 w-full h-1 bg-emerald-500/20 z-50">
         <motion.div 
@@ -680,34 +681,15 @@ export default function App() {
                         </div>
                         <div className="flex gap-4">
                           {tailoredLatex && (
-                            <>
-                              <button 
-                                onClick={handleGeneratePdf}
-                                disabled={isGeneratingPdf}
-                                className="text-[9px] uppercase tracking-widest text-emerald-500 hover:text-white transition-colors flex items-center gap-1"
-                                title="Generate PDF using Online Compiler"
-                              >
-                                <FileText className="w-3 h-3" />
-                                [{isGeneratingPdf ? "Compiling..." : "Generate_PDF"}]
-                              </button>
-                              <button 
-                                onClick={handleDownloadTex}
-                                className="text-[9px] uppercase tracking-widest text-emerald-500 hover:text-white transition-colors flex items-center gap-1"
-                                title="Download .tex file to use in Overleaf"
-                              >
-                                <Download className="w-3 h-3" />
-                                [Download_.tex]
-                              </button>
-                              <button 
-                                onClick={() => {
-                                  navigator.clipboard.writeText(tailoredLatex);
-                                  alert("LaTeX copied to clipboard!");
-                                }}
-                                className="text-[9px] uppercase tracking-widest hover:text-white transition-colors"
-                              >
-                                [Copy_Code]
-                              </button>
-                            </>
+                            <button 
+                              onClick={handleGeneratePdf}
+                              disabled={isGeneratingPdf}
+                              className="text-[9px] uppercase tracking-widest text-emerald-500 hover:text-white transition-colors flex items-center gap-1"
+                              title="Generate PDF using Online Compiler"
+                            >
+                              <FileText className="w-3 h-3" />
+                              [{isGeneratingPdf ? "Compiling_PDF..." : "Generate_PDF"}]
+                            </button>
                           )}
                         </div>
                       </div>
@@ -767,7 +749,7 @@ export default function App() {
                 animate={{ opacity: 1, y: 0 }}
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-medium mb-6 leading-[1.2] md:leading-[1.15] tracking-tight"
               >
-                I engineer <span className="glow-text">data-intensive systems</span> that automate workflows and operate under real-world constraints.
+                Architecting <span className="glow-text">high-throughput systems</span> and autonomous workflows under real-world constraints.
               </motion.h1>
               
               <motion.p 
@@ -806,7 +788,7 @@ export default function App() {
             </div>
 
             <div className="lg:col-span-4 flex flex-col gap-6">
-              <div className="hardware-card border-l-4 border-l-emerald-500 tactile-card">
+              <div className="hardware-card border-l-4 border-l-emerald-500 tactile-card dot-grid">
                 <div className="hardware-card-content p-6">
                   <div className="micro-label mb-4">Personnel_Profile</div>
                   <div className="flex items-center gap-4 mb-8">
@@ -836,7 +818,7 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="hardware-card border-l-4 border-l-emerald-500/30 tactile-card">
+              <div className="hardware-card border-l-4 border-l-emerald-500/30 tactile-card dot-grid">
                 <div className="hardware-card-content p-6">
                   <div className="micro-label mb-4">Core_Competencies</div>
                   <div className="space-y-4">
@@ -929,7 +911,7 @@ export default function App() {
                 </div>
 
                 <div className="lg:col-span-7">
-                  <div className="hardware-card tactile-card">
+                  <div className="hardware-card tactile-card dot-grid">
                     <div className="hardware-card-content p-8 lg:p-12">
                       <div className="space-y-12">
                         <section>
@@ -966,7 +948,7 @@ export default function App() {
 
         {/* Engineering Philosophy */}
         <section id="approach" className="mb-32">
-          <div className="hardware-card border-t-4 border-t-emerald-500 tactile-card">
+          <div className="hardware-card border-t-4 border-t-emerald-500 tactile-card dot-grid">
             <div className="hardware-card-content p-12">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                 <div className="lg:col-span-4">
@@ -1022,11 +1004,19 @@ export default function App() {
               <div key={i} className="bg-ink p-8">
                 <div className="flex items-center gap-3 mb-6">
                   {group.icon}
-                  <div className="micro-label text-emerald-500/60">{group.category}</div>
+                  <div className={`micro-label ${
+                    group.color === 'blue' ? 'text-blue-500/60' : 
+                    group.color === 'purple' ? 'text-purple-500/60' : 
+                    'text-emerald-500/60'
+                  }`}>{group.category}</div>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {group.items.map(skill => (
-                    <span key={skill} className="px-3 py-1 bg-white/5 text-[11px] font-mono text-white/80 border border-white/5">
+                    <span key={skill} className={`px-3 py-1 bg-white/5 text-[11px] font-mono border transition-colors ${
+                      group.color === 'blue' ? 'text-blue-400 border-blue-500/10 hover:border-blue-500/30' : 
+                      group.color === 'purple' ? 'text-purple-400 border-purple-500/10 hover:border-purple-500/30' : 
+                      'text-emerald-400 border-emerald-500/10 hover:border-emerald-500/30'
+                    }`}>
                       {skill}
                     </span>
                   ))}
@@ -1038,7 +1028,7 @@ export default function App() {
 
         {/* Contact */}
         <section id="contact">
-          <div className="hardware-card p-12 text-center relative overflow-visible tactile-card">
+          <div className="hardware-card p-12 text-center relative overflow-visible tactile-card dot-grid">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 bg-[#0A0A0B] border border-white/10 z-30">
               <div className="micro-label">Personnel_Signature</div>
             </div>

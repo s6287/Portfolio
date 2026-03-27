@@ -81,7 +81,7 @@ const PROJECTS = [
   {
     id: "spectra",
     title: "Spectra",
-    subtitle: "Multi-tenant Workflow Operating System",
+    subtitle: "Intelligent Workflow Management System",
     description: "Most organisations buy Slack for communication, Wrike for tasks, and Basecamp for projects — then struggle to make three tools work as one. Spectra replaces all three with a single internal system built around how the organisation actually works.",
     problem: "A multi-department organisation had no single source of truth for work. Tasks were assigned manually, proof of completion lived in email threads, reviews happened in WhatsApp, and client deliverables were tracked in spreadsheets. Cross-department coordination — where the SEO team's output becomes the web team's input — had no automated handoff.",
     approach: "I architected and implemented a multi-tenant architecture with skill-based task routing. When a new project enters the system — say, a website build — Spectra automatically creates and assigns tasks across every relevant department in sequence: SEO first for content, then web development, then CRM for client communication, then design for graphics. No manual assignment.",
@@ -89,12 +89,12 @@ const PROJECTS = [
     tradeoff: "Tradeoff: Prioritized a custom multi-tenant architecture over standard SaaS integrations to enforce strict cross-department data lineage and eliminate the 'fragmented truth' problem inherent in multi-tool workflows.",
     outcome: "Consolidated 3 SaaS subscriptions (Slack, Wrike, Basecamp) totalling $1,250/month. Estimated annual saving: $15K+. Auto-assignment rate reached ~70%, eliminating manual task distribution overhead entirely. 50+ daily active users across departments.",
     tags: ["React", "Node.js", "PostgreSQL", "Supabase"],
-    metrics: ["~$15K Annual Savings", "~70% Auto-Assignment", "50+ Daily Users"]
+    metrics: ["VERIFIED: $15K+ SAVINGS", "EFFICIENCY: 70% AUTO-ROUTING", "50+ Daily Users"]
   },
   {
     id: "seo",
-    title: "SEO Intelligence Platform",
-    subtitle: "Automated Keyword Ranking Pipeline",
+    title: "RankSense",
+    subtitle: "SEO Rank Tracking Platform",
     description: "A high-frequency ranking pipeline designed to eliminate manual tracking and optimize API credit consumption through intelligent deduplication.",
     problem: "An SEO team was manually tracking keyword rankings, which was highly inefficient. When they moved to the DataForSEO API, a new problem emerged: the same keyword existed across multiple client projects, triggering redundant API calls and paying for the same data multiple times.",
     approach: "I designed the deduplication logic to separate unique keywords from duplicate keywords before any API call is made. The pipeline identifies true uniques, hits the API once, and then a sync function propagates the ranking data to all duplicate keywords across projects — same result, one API credit.",
@@ -102,13 +102,13 @@ const PROJECTS = [
     tradeoff: "Tradeoff: Chose batch processing over real-time updates. Real-time would exceed API rate limits and increase cost under concurrency spikes, while batching ensures stability and cost-efficiency.",
     outcome: "50K+ keywords processed per run in under 10 minutes. Duplicate API calls eliminated — approx. 40% reduction in credit spend, saving an estimated $2K+ annually.",
     tags: ["TypeScript", "Supabase Edge Functions", "PostgreSQL", "DataForSEO API", "Cron"],
-    metrics: ["50K+ Keywords / Run", "~40% Credit Saving", "Automated Pipeline"],
+    metrics: ["THROUGHPUT: 50K+ RECORDS", "OPTIMIZATION: 40% CREDIT LIFT", "Automated Pipeline"],
     hasDiagram: true
   },
   {
     id: "crm",
-    title: "CGAI CRM",
-    subtitle: "Event Attendee Intelligence Platform",
+    title: "AttenView",
+    subtitle: "Attendee Insights Dashboard",
     description: "A production-grade CRM focused on identity resolution for 50K+ event attendees, accelerating sales cycles through automated lead scoring.",
     problem: "A gifting industry association was managing 50K+ attendees in spreadsheets. Inconsistent identifiers (e.g., 'Rahul Shah' vs 'Rahul S.') created invisible duplicates, attendance history was lost between events, and source tracking was non-existent.",
     approach: "The data model separates concerns: one table for deduplicated person records, another for event-specific attendance timelines. I optimized the database-level deduplication and bulk upload to handle identifier inconsistency through dynamic reference key selection. Rows missing the primary key go into an unprocessed pool where the system suggests the next best identifier.",
@@ -116,7 +116,7 @@ const PROJECTS = [
     tradeoff: "Tradeoff: Used database-level deduplication instead of application-layer matching to ensure performance at 50K+ scale.",
     outcome: "Complete lifecycle visibility for every attendee. Lead qualification time reduced by approx. 80%. Duplicate records across events eliminated entirely. Win rates boosted by an estimated 25%.",
     tags: ["React", "Node.js", "PostgreSQL", "Supabase", "TypeScript"],
-    metrics: ["~92% Match Accuracy", "~80% Faster Qualification", "~25% Conversion Lift"]
+    metrics: ["ACCURACY: 92% RESOLUTION", "EFFICIENCY: 80% LIFT", "IMPACT: 25% CONVERSION LIFT"]
   }
 ];
 
@@ -231,23 +231,18 @@ const RESUME_LATEX_TEMPLATE = `
 
 %----------HEADING-----------
 \\begin{center}
-    {\\Huge \\scshape\\color{primaryblue} Shivam Singh} \\ \\vspace{3pt}
+    {\\Huge \\scshape\\color{primaryblue} Shivam Singh} \\\\ \\vspace{2pt}
     \\small\\color{darkgray}
-    Phone: +91-6287183433 \\;|\\;
-    Email: \\href{mailto:shivamsinghsrs@gmail.com}{shivamsinghsrs@gmail.com} \\;|\\;
-    Location: Mumbai, India \\
-    \\vspace{2pt}
-    LinkedIn: \\href{https://linkedin.com/in/shiivmrajput}{linkedin.com/in/shiivmrajput} \\;|\\;
-    GitHub: \\href{https://github.com/s6287}{github.com/s6287} \\;|\\;
-    Portfolio: \\href{https://ais-dev-jeigl5474v7mevonku2zjy-668497039219.europe-west2.run.app}{[Live Portfolio]}
+    Mumbai, India $|$ +91-6287183433 $|$ \\href{mailto:shivamsinghsrs@gmail.com}{shivamsinghsrs@gmail.com} \\\\
+    \\href{https://linkedin.com/in/shiivmrajput}{LinkedIn: shiivmrajput} $|$ \\href{https://github.com/s6287}{GitHub: s6287} $|$ \\href{https://shivam-singh-omega.vercel.app}{Portfolio: shivam-singh-omega}
 \\end{center}
-\\vspace{-8pt}
+\\vspace{-10pt}
 
 %-----------PROFESSIONAL SUMMARY-----------
 \\section{Professional Summary}
 \\begin{itemize}[leftmargin=0.15in, label={}]
     \\small{\\item{
-    Full Stack Developer with 1.9+ years of experience engineering data-intensive systems and automated workflows. Proven track record of delivering high-impact production applications, including a custom Workflow OS that saved \\\$15K+ annually and an SEO pipeline processing 50K+ records per run. Expert in TypeScript, React, and PostgreSQL, with a focus on system reliability, credit optimization, and technical excellence.
+    Full Stack Developer with 1.9+ years of experience engineering data-intensive systems and automated workflows. Proven track record of delivering high-impact production applications, including a custom Workflow OS saving \\textbf{\\\$15K+ annually} and an SEO pipeline processing \\textbf{50K+ records per run}. Expert in TypeScript, React, and PostgreSQL, with a focus on system reliability, credit optimization, and technical excellence.
     }}
 \\end{itemize}
 \\vspace{-18pt}
@@ -273,9 +268,10 @@ const RESUME_LATEX_TEMPLATE = `
       {Associate Web Developer}{July 2024 -- Present}
       {Rath Infotech}{Mumbai, India}
       \\resumeItemListStart
-        \\resumeItem{Engineered 3 production-grade systems supporting 50+ daily users while managing enterprise-scale data operations for multiple departments.}
-        \\resumeItem{Architected an automated SEO intelligence platform reclaiming 400+ staff hours annually through high-frequency keyword monitoring and performance insights.}
-        \\resumeItem{Spearheaded a lead intelligence CRM reducing qualification time by 80\\% (12h to 2.5h) for 50K+ records using optimized PostgreSQL indexing.}
+        \\resumeItem{Owned full-stack development across 3 production systems supporting 50+ daily users, managing end-to-end engineering from React UIs to Node.js APIs and PostgreSQL schema modelling.}
+        \\resumeItem{Architected a skill-based task routing engine that automated \\textbf{70\\% of manual assignments}, replacing a fragmented multi-tool workflow and saving the organisation \\textbf{\\\$15K+ annually}.}
+        \\resumeItem{Developed a high-frequency keyword ranking pipeline processing \\textbf{50K+ records per run} with intelligent deduplication logic, cutting redundant API calls by 40\\% and saving \\textbf{\\\$2K+ in annual API costs}.}
+        \\resumeItem{Engineered a React dashboard with real-time data visualisation and bulk Excel import (10K+ rows), reducing lead qualification time from \\textbf{12 hours to 2.5 hours} for the sales team.}
       \\resumeItemListEnd
   \\resumeSubHeadingListEnd
 \\vspace{-14pt}
@@ -286,32 +282,29 @@ const RESUME_LATEX_TEMPLATE = `
     \\resumeSubHeadingListStart
     
       \\resumeProjectHeading
-          {\\textbf{Spectra — Multi-tenant Workflow Operating System}}{}
+          {\\textbf{Spectra — Intelligent Workflow Management System}}{}
           \\resumeItemListStart
-            \\resumeItem{\\textbf{\\color{darkgray}Technologies:} React, Node.js, PostgreSQL, Supabase, RBAC}
-            \\resumeItem{Replaced Slack, Wrike, and Basecamp with a custom internal system, achieving \\textbf{\\\$15K+ in annual subscription savings} for a multi-department organization.}
-            \\resumeItem{Built a skill-based task routing engine with \\textbf{70\\% auto-assignment rate} across 7 departments, eliminating manual distribution overhead.}
-            \\resumeItem{Implemented granular RBAC for 50+ users, ensuring strict data lineage and automated handoffs between SEO and Web Development teams.}
+            \\resumeItem{Architected a multi-tenant SaaS platform from scratch, consolidating 3 subscriptions (Slack, Wrike, Basecamp) into a single internal system, delivering \\textbf{\\\$15K+ annual savings}.}
+            \\resumeItem{Implemented a skill-based task routing engine that automatically assigns tasks across departments in sequence (e.g. SEO $\\rightarrow$ Dev $\\rightarrow$ CRM), achieving a \\textbf{70\\% auto-assignment rate}.}
+            \\resumeItem{Designed granular RBAC for 50+ users across 7 departments, ensuring strict data lineage and automated handoffs between technical and creative teams.}
           \\resumeItemListEnd
           \\vspace{-15pt}
     
       \\resumeProjectHeading
-          {\\textbf{SEO Intelligence \\& Ranking Pipeline}}{}
+          {\\textbf{RankSense — SEO Rank Tracking Platform}}{}
           \\resumeItemListStart
-            \\resumeItem{\\textbf{\\color{darkgray}Technologies:} Supabase Edge Functions, PostgreSQL, DataForSEO API, Cron}
-            \\resumeItem{Developed a high-frequency pipeline processing \\textbf{50K+ keywords in under 10 minutes} using dynamic worker scaling and parallel execution.}
-            \\resumeItem{Engineered an intelligent deduplication layer that identifies unique keywords across client projects, reducing API credit spend by \\textbf{40\\% (\\\$2K+ annually)}.}
-            \\resumeItem{Orchestrated a webhook-driven ETL pipeline with cron triggers for real-time data synchronization and persistent storage in PostgreSQL.}
+            \\resumeItem{Designed a distributed keyword ranking pipeline using a dynamic worker pool (1--20 concurrent workers) calibrated against API rate limits and Supabase Edge Function constraints.}
+            \\resumeItem{Built a deduplication layer that separates unique from duplicate keywords before API calls, reducing credit spend by \\textbf{40\\% (\\\$2K+ saved annually)}.}
+            \\resumeItem{Orchestrated a webhook-driven ETL pipeline with cron triggers for real-time data synchronization, processing \\textbf{50K+ keywords per run} in under 10 minutes.}
           \\resumeItemListEnd
-          \\vspace{-13pt}
+          \\vspace{-15pt}
           
       \\resumeProjectHeading
-          {\\textbf{CGAI CRM — Identity Resolution Platform}}{}
+          {\\textbf{AttenView — Attendee Insights Dashboard}}{}
           \\resumeItemListStart
-            \\resumeItem{\\textbf{\\color{darkgray}Technologies:} React, Node.js, PostgreSQL, Fuzzy Matching Algorithms}
-            \\resumeItem{Built a production-grade CRM managing \\textbf{50K+ attendee records} with \\textbf{92\\% accuracy} in identity resolution using fuzzy matching and indexed lookups.}
+            \\resumeItem{Built a production-grade CRM managing \\textbf{50K+ attendee records} with \\textbf{92\\% accuracy} in identity resolution using fuzzy matching and indexed lookups in PostgreSQL.}
             \\resumeItem{Optimized database-level deduplication and batch processing (500-row chunks) to prevent statement timeouts during massive event data imports.}
-            \\resumeItem{Developed a field-level audit trail system for complete data lineage and a predictive lead scoring model that \\textbf{boosted sales win rates by 25\\%}.}
+            \\resumeItem{Developed a predictive lead scoring model that reduced lead qualification time by 80\\% and \\textbf{boosted sales win rates by 25\\%}.}
           \\resumeItemListEnd
           \\vspace{-13pt}
     \\resumeSubHeadingListEnd
@@ -320,7 +313,6 @@ const RESUME_LATEX_TEMPLATE = `
 %-----------EDUCATION-----------
 \\section{Education}
   \\resumeSubHeadingListStart
-    
     \\resumeSubheading
       {Bachelor of Science in Computer Science, SGPA: 8.58/10.0}{2021 -- 2024}
       {University of Mumbai}{Mumbai, India}
@@ -433,7 +425,7 @@ export default function App() {
 
   const [activeTab, setActiveTab] = useState<"prep" | "tailor">("prep");
   const [jobDescription, setJobDescription] = useState("");
-  const [tailoredLatex, setTailoredLatex] = useState("");
+  const [tailoredLatex, setTailoredLatex] = useState(RESUME_LATEX_TEMPLATE);
   const [isTailoring, setIsTailoring] = useState(false);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
 
@@ -441,16 +433,13 @@ export default function App() {
     if (!tailoredLatex) return;
     setIsGeneratingPdf(true);
     
-    // Using a hidden form to send a POST request to texlive.net
-    // This is a very stable alternative to latex.online
+    // Attempting texlive.net again with a more standard form construction
     const form = document.createElement('form');
     form.method = 'POST';
     form.action = 'https://texlive.net/cgi-bin/latexcgi';
     form.target = '_blank';
-    form.setAttribute('enctype', 'multipart/form-data');
-    form.encoding = 'multipart/form-data';
+    form.enctype = 'multipart/form-data';
 
-    // texlive.net expects 'filecontents[]' and 'filename[]'
     const inputContent = document.createElement('input');
     inputContent.type = 'hidden';
     inputContent.name = 'filecontents[]';
@@ -460,7 +449,7 @@ export default function App() {
     const inputName = document.createElement('input');
     inputName.type = 'hidden';
     inputName.name = 'filename[]';
-    inputName.value = 'resume.tex';
+    inputName.value = 'main.tex';
     form.appendChild(inputName);
 
     const inputEngine = document.createElement('input');
@@ -479,7 +468,8 @@ export default function App() {
     form.submit();
     document.body.removeChild(form);
     
-    setTimeout(() => setIsGeneratingPdf(false), 2000);
+    // Reset loading state after a short delay
+    setTimeout(() => setIsGeneratingPdf(false), 3000);
   };
   const handleTailorResume = async () => {
     if (!jobDescription.trim()) return;
@@ -728,10 +718,16 @@ export default function App() {
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
               <div className="status-dot animate-pulse" />
-              <span className="micro-label">Personnel_File</span>
+              <div className="flex flex-col">
+                <span className="micro-label leading-none">Personnel_File</span>
+                <span className="text-[8px] text-white/20 uppercase tracking-widest mt-1">(About Me)</span>
+              </div>
             </div>
-            <div className="hidden sm:block px-2 py-0.5 border border-emerald-500/30 rounded-sm">
-              <span className="micro-label text-emerald-500 text-[8px]">Available_for_Hire</span>
+            <div className="hidden sm:flex flex-col items-end">
+              <div className="px-2 py-0.5 border border-emerald-500/30 rounded-sm">
+                <span className="micro-label text-emerald-500 text-[8px]">Available_for_Hire</span>
+              </div>
+              <span className="text-[8px] text-emerald-500/40 uppercase tracking-widest mt-1">(Open to Roles)</span>
             </div>
           </div>
           
@@ -776,13 +772,19 @@ export default function App() {
               </motion.div>
 
               <div className="flex flex-wrap gap-4">
-                <a href="#projects" className="px-8 py-4 bg-emerald-500 text-black font-medium hover:bg-emerald-400 transition-colors flex items-center gap-2 group">
-                  Access_Project_Logs
-                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <a href="#projects" className="px-8 py-4 bg-emerald-500 text-black font-medium hover:bg-emerald-400 transition-colors flex flex-col items-center gap-1 group">
+                  <div className="flex items-center gap-2">
+                    Access_Project_Logs
+                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </div>
+                  <span className="text-[8px] uppercase tracking-widest opacity-60">(View Projects)</span>
                 </a>
-                <a href="#contact" className="px-8 py-4 border border-white/10 hover:bg-white/5 transition-colors flex items-center gap-2 group">
-                  Initiate_Contact
-                  <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                <a href="#contact" className="px-8 py-4 border border-white/10 hover:bg-white/5 transition-colors flex flex-col items-center gap-1 group">
+                  <div className="flex items-center gap-2">
+                    Initiate_Contact
+                    <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                  </div>
+                  <span className="text-[8px] uppercase tracking-widest opacity-40">(Send Email)</span>
                 </a>
               </div>
             </div>
@@ -790,7 +792,10 @@ export default function App() {
             <div className="lg:col-span-4 flex flex-col gap-6">
               <div className="hardware-card border-l-4 border-l-emerald-500 tactile-card dot-grid">
                 <div className="hardware-card-content p-6">
-                  <div className="micro-label mb-4">Personnel_Profile</div>
+                  <div className="flex flex-col mb-4">
+                    <span className="micro-label">Personnel_Profile</span>
+                    <span className="text-[8px] text-white/20 uppercase tracking-widest mt-1">(About Me)</span>
+                  </div>
                   <div className="flex items-center gap-4 mb-8">
                     <div className="w-16 h-16 bg-white/5 border border-white/10 flex items-center justify-center relative overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-transparent" />
@@ -845,9 +850,9 @@ export default function App() {
           <div className="grid grid-cols-2 lg:grid-cols-4 border border-white/10 bg-ink/50 backdrop-blur-md tactile-card">
             {[
               { label: "Production Systems", value: "03", sub: "Built & Deployed" },
-              { label: "Records Processed", value: "50K+", sub: "Per Upload" },
-              { label: "Annual Savings", value: "$15K+", sub: "Spectra OS" },
-              { label: "Staff Hours", value: "400+", sub: "Reclaimed Annually" }
+              { label: "Data Throughput", value: "50K+", sub: "THROUGHPUT: 50K+ RECORDS" },
+              { label: "Annual Savings", value: "$15K+", sub: "VERIFIED: $15K+ SAVINGS" },
+              { label: "System Efficiency", value: "80%", sub: "EFFICIENCY: 80% LIFT" }
             ].map((metric, i) => (
               <div key={i} className="p-8 border-r border-b lg:border-b-0 border-white/10 last:border-r-0">
                 <div className="micro-label mb-2">{metric.label}</div>
@@ -937,6 +942,20 @@ export default function App() {
                           <div className="micro-label mb-4 text-emerald-500/60">04_Outcome</div>
                           <p className="text-white/80 leading-relaxed">{project.outcome}</p>
                         </section>
+
+                        <div className="pt-8 border-t border-white/5 flex items-center gap-4">
+                          <div className="p-2 bg-emerald-500/10 rounded border border-emerald-500/20">
+                            <Shield className="w-4 h-4 text-emerald-500" />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="text-[10px] font-mono text-emerald-500/80 uppercase tracking-widest">
+                              [SYSTEM_NOTICE]: Codebase_Encrypted_NDA
+                            </span>
+                            <span className="text-[9px] text-white/30 uppercase tracking-[0.15em] mt-1">
+                              Open for architecture walkthrough on a call
+                            </span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1023,6 +1042,38 @@ export default function App() {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Architecture Walkthrough CTA */}
+        <section className="mb-32">
+          <div className="hardware-card border-emerald-500/30 bg-emerald-500/[0.02] tactile-card dot-grid">
+            <div className="hardware-card-content p-8 md:p-16 text-center">
+              <div className="flex justify-center mb-8">
+                <div className="p-5 bg-emerald-500/10 rounded-full border border-emerald-500/20 animate-pulse">
+                  <Workflow className="w-10 h-10 text-emerald-500" />
+                </div>
+              </div>
+              <h2 className="text-2xl md:text-4xl font-medium mb-6 uppercase tracking-tight">
+                Request_Architecture_Walkthrough
+              </h2>
+              <p className="text-white/50 text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+                Interested in the technical implementation details? I'm available for deep-dive calls to walk through system design, 
+                database schemas, and scaling strategies for any of the projects listed above.
+              </p>
+              <div className="flex flex-col items-center gap-4">
+                <a 
+                  href="mailto:shivamsinghsrs@gmail.com?subject=Architecture Walkthrough Request"
+                  className="px-12 py-5 bg-emerald-500 text-black font-mono text-xs uppercase tracking-[0.2em] hover:bg-emerald-400 transition-all shadow-[0_0_30px_rgba(16,185,129,0.2)] group flex items-center gap-3"
+                >
+                  Initiate_System_Deep_Dive
+                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </a>
+                <span className="text-[10px] text-emerald-500/40 uppercase tracking-[0.3em] mt-2">
+                  (Loom / Video Call / Technical Review)
+                </span>
+              </div>
+            </div>
           </div>
         </section>
 

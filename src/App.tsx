@@ -84,25 +84,25 @@ const PROJECTS = [
     subtitle: "Multi-tenant Workflow Operating System",
     description: "Most organisations buy Slack for communication, Wrike for tasks, and Basecamp for projects — then struggle to make three tools work as one. Spectra replaces all three with a single internal system built around how the organisation actually works.",
     problem: "A multi-department organisation had no single source of truth for work. Tasks were assigned manually, proof of completion lived in email threads, reviews happened in WhatsApp, and client deliverables were tracked in spreadsheets. Cross-department coordination — where the SEO team's output becomes the web team's input — had no automated handoff.",
-    approach: "The core architecture is multi-tenant with skill-based task routing. When a new project enters the system — say, a website build — Spectra automatically creates and assigns tasks across every relevant department in sequence: SEO first for content, then web development, then CRM for client communication, then design for graphics. No manual assignment.",
+    approach: "I architected and implemented a multi-tenant architecture with skill-based task routing. When a new project enters the system — say, a website build — Spectra automatically creates and assigns tasks across every relevant department in sequence: SEO first for content, then web development, then CRM for client communication, then design for graphics. No manual assignment.",
     details: "Each task follows a defined lifecycle: assigned → proof submitted → review → feedback → scored. Workers submit proof of completion before a task closes. If a task is not doable, it gets flagged for reassignment rather than silently dropped. Managers review proofs and give structured feedback that feeds into each team member's performance matrix. RBAC manages 50+ users across 7 departments — each user sees only what their role permits.",
     tradeoff: "Tradeoff: Prioritized a custom multi-tenant architecture over standard SaaS integrations to enforce strict cross-department data lineage and eliminate the 'fragmented truth' problem inherent in multi-tool workflows.",
-    outcome: "Consolidated 3 SaaS subscriptions (Slack, Wrike, Basecamp) totalling $1,250/month. Annual saving: $15K+. Auto-assignment rate reached 70%, eliminating manual task distribution overhead entirely. 50+ daily active users across departments.",
+    outcome: "Consolidated 3 SaaS subscriptions (Slack, Wrike, Basecamp) totalling $1,250/month. Estimated annual saving: $15K+. Auto-assignment rate reached ~70%, eliminating manual task distribution overhead entirely. 50+ daily active users across departments.",
     tags: ["React", "Node.js", "PostgreSQL", "Supabase"],
-    metrics: ["$15K+ Annual Savings", "70% Auto-Assignment", "50+ Daily Users"]
+    metrics: ["~$15K Annual Savings", "~70% Auto-Assignment", "50+ Daily Users"]
   },
   {
     id: "seo",
     title: "SEO Intelligence Platform",
     subtitle: "Automated Keyword Ranking Pipeline",
     description: "A high-frequency ranking pipeline designed to eliminate manual tracking and optimize API credit consumption through intelligent deduplication.",
-    problem: "An SEO team was manually tracking keyword rankings, spending 400+ staff hours annually. When they moved to the DataForSEO API, a new problem emerged: the same keyword existed across multiple client projects, triggering redundant API calls and paying for the same data multiple times.",
-    approach: "The core insight was separating unique keywords from duplicate keywords before any API call is made. The pipeline identifies true uniques, hits the API once, and then a sync function propagates the ranking data to all duplicate keywords across projects — same result, one API credit.",
+    problem: "An SEO team was manually tracking keyword rankings, which was highly inefficient. When they moved to the DataForSEO API, a new problem emerged: the same keyword existed across multiple client projects, triggering redundant API calls and paying for the same data multiple times.",
+    approach: "I designed the deduplication logic to separate unique keywords from duplicate keywords before any API call is made. The pipeline identifies true uniques, hits the API once, and then a sync function propagates the ranking data to all duplicate keywords across projects — same result, one API credit.",
     details: "The orchestrator calculates workers dynamically: workersNeeded = Math.min(Math.ceil(pendingCount / 100), 20). Workers fire in parallel and the orchestrator exits immediately to prevent timeout failures on large batches. The full pipeline runs on cron triggers: post-orchestrator → post-workers → sync-duplicate-rankings → get-workers → frontend update.",
-    tradeoff: "Tradeoff: Chose batch processing over real-time updates to avoid API rate limits and reduce cost under high concurrency.",
-    outcome: "50K+ keywords processed per run in under 10 minutes. Duplicate API calls eliminated — 40% reduction in credit spend, saving $2K+ annually. 400+ staff hours reclaimed.",
+    tradeoff: "Tradeoff: Chose batch processing over real-time updates. Real-time would exceed API rate limits and increase cost under concurrency spikes, while batching ensures stability and cost-efficiency.",
+    outcome: "50K+ keywords processed per run in under 10 minutes. Duplicate API calls eliminated — approx. 40% reduction in credit spend, saving an estimated $2K+ annually.",
     tags: ["TypeScript", "Supabase Edge Functions", "PostgreSQL", "DataForSEO API", "Cron"],
-    metrics: ["50K+ Keywords / Run", "40% Credit Saving", "400+ Hours Reclaimed"],
+    metrics: ["50K+ Keywords / Run", "~40% Credit Saving", "Automated Pipeline"],
     hasDiagram: true
   },
   {
@@ -111,12 +111,12 @@ const PROJECTS = [
     subtitle: "Event Attendee Intelligence Platform",
     description: "A production-grade CRM focused on identity resolution for 50K+ event attendees, accelerating sales cycles through automated lead scoring.",
     problem: "A gifting industry association was managing 50K+ attendees in spreadsheets. Inconsistent identifiers (e.g., 'Rahul Shah' vs 'Rahul S.') created invisible duplicates, attendance history was lost between events, and source tracking was non-existent.",
-    approach: "The data model separates concerns: one table for deduplicated person records, another for event-specific attendance timelines. The bulk upload handles identifier inconsistency through dynamic reference key selection. Rows missing the primary key go into an unprocessed pool where the system suggests the next best identifier.",
+    approach: "The data model separates concerns: one table for deduplicated person records, another for event-specific attendance timelines. I optimized the database-level deduplication and bulk upload to handle identifier inconsistency through dynamic reference key selection. Rows missing the primary key go into an unprocessed pool where the system suggests the next best identifier.",
     details: "Duplicate detection runs at the PostgreSQL level using indexed lookups across 50K rows. Batch processing runs in 500-row chunks inside database functions to prevent statement timeouts. Implemented a field-level audit trail where every field has its own _tag, _updated_at, and _updated_by columns for complete data lineage.",
     tradeoff: "Tradeoff: Used database-level deduplication instead of application-layer matching to ensure performance at 50K+ scale.",
-    outcome: "Complete lifecycle visibility for every attendee. Lead qualification reduced from 12 hours to 2.5 hours. Duplicate records across events eliminated entirely. Win rates boosted by 25%.",
+    outcome: "Complete lifecycle visibility for every attendee. Lead qualification time reduced by approx. 80%. Duplicate records across events eliminated entirely. Win rates boosted by an estimated 25%.",
     tags: ["React", "Node.js", "PostgreSQL", "Supabase", "TypeScript"],
-    metrics: ["92% Match Accuracy", "80% Faster Qualification", "25% Conversion Lift"]
+    metrics: ["~92% Match Accuracy", "~80% Faster Qualification", "~25% Conversion Lift"]
   }
 ];
 
@@ -749,7 +749,7 @@ export default function App() {
                 animate={{ opacity: 1, y: 0 }}
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-medium mb-6 leading-[1.2] md:leading-[1.15] tracking-tight"
               >
-                Architecting <span className="glow-text">high-throughput systems</span> and autonomous workflows under real-world constraints.
+                Building <span className="glow-text">scalable systems</span> and automated workflows for real-world use cases.
               </motion.h1>
               
               <motion.p 
@@ -808,7 +808,7 @@ export default function App() {
                     </div>
                     <div className="flex justify-between items-center text-[10px] font-mono">
                       <span className="text-white/40">EXPERIENCE</span>
-                      <span className="text-white/80">1.9_YEARS</span>
+                      <span className="text-white/80">1.9 years</span>
                     </div>
                     <div className="flex justify-between items-center text-[10px] font-mono">
                       <span className="text-white/40">SPECIALIZATION</span>

@@ -510,54 +510,31 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen relative selection:bg-emerald-500/30">
-      {/* Immersive Scanline */}
-      <div className="scanline" />
+    <div className="min-h-screen relative bg-black selection:bg-white/20">
+      {/* Grok Glow Background */}
+      <div className="grok-glow" />
       
-      {/* Global Status Bar */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-emerald-500/20 z-50">
-        <motion.div 
-          initial={{ width: 0 }}
-          animate={{ width: "100%" }}
-          transition={{ duration: 2, ease: "easeInOut" }}
-          className="h-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.8)]"
-        />
-      </div>
-
       {/* Top Navigation Bar */}
-      <div className="fixed top-0 left-0 w-full h-16 border-b border-white/5 bg-ink/80 backdrop-blur-xl z-40 px-4 md:px-6 flex items-center justify-between">
-        <div className="flex items-center gap-3 md:gap-6">
-          <div className="auth-badge group cursor-default">
-            <Terminal className="w-3 h-3 text-emerald-500 group-hover:shadow-[0_0_10px_rgba(16,185,129,1)] transition-all" />
-            <span className="group-hover:text-emerald-400 transition-colors">SHIVAM_SINGH</span>
-          </div>
-          <div className="hidden lg:block h-4 w-px bg-white/10" />
-          <div className="hidden lg:flex items-center gap-3">
-            <span className="micro-label text-white/20">Role:</span>
-            <div className="system-log text-emerald-500/80">
-              Full_Stack_Dev_v1.0
-            </div>
+      <div className="fixed top-0 left-0 w-full h-20 border-b border-white/5 bg-black/50 backdrop-blur-2xl z-40 px-6 md:px-12 flex items-center justify-between">
+        <div className="flex items-center gap-8">
+          <div className="flex items-center gap-3">
+            <div className="status-dot" />
+            <span className="font-display font-bold text-lg tracking-tight">SHIVAM SINGH</span>
           </div>
         </div>
 
-        <nav className="flex items-center gap-1 bg-white/5 p-1 rounded-full border border-white/10">
-          <a href="#projects" className="nav-link group">
-            <Layers className="w-3 h-3 group-hover:text-emerald-400 transition-colors" />
-            <span className="hidden sm:inline">Projects</span>
-          </a>
-          <a href="#approach" className="nav-link group">
-            <Workflow className="w-3 h-3 group-hover:text-emerald-400 transition-colors" />
-            <span className="hidden sm:inline">Approach</span>
-          </a>
-          <a href="#resume" className="nav-link group">
-            <FileText className="w-3 h-3 group-hover:text-emerald-400 transition-colors" />
-            <span className="hidden sm:inline">Resume</span>
-          </a>
-          <a href="#contact" className="nav-link-primary group">
-            <Mail className="w-3 h-3 group-hover:scale-110 transition-transform" />
-            <span className="hidden sm:inline">Contact</span>
-          </a>
+        <nav className="hidden md:flex items-center gap-2 bg-white/5 p-1 rounded-full border border-white/10">
+          <a href="#projects" className="nav-link">Projects</a>
+          <a href="#approach" className="nav-link">Approach</a>
+          <a href="#resume" className="nav-link">Resume</a>
+          <a href="#contact" className="nav-link-primary">Contact</a>
         </nav>
+
+        <div className="md:hidden">
+          <button className="p-2 text-white/60 hover:text-white">
+            <Terminal className="w-5 h-5" />
+          </button>
+        </div>
       </div>
 
       {/* Hidden Interview Prep Module */}
@@ -702,251 +679,147 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      <main className="max-w-7xl mx-auto px-6 pt-24 md:pt-32 pb-24 relative z-10">
+      <main className="max-w-7xl mx-auto px-6 pt-32 md:pt-48 pb-32 relative z-10">
         {/* Hero Section */}
-        <section className="mb-24 md:mb-32">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <div className="status-dot animate-pulse" />
-              <div className="flex flex-col">
-                <span className="micro-label leading-none">Personnel_File</span>
-                <span className="text-[8px] text-white/20 uppercase tracking-widest mt-1">(About Me)</span>
-              </div>
-            </div>
-            <div className="hidden sm:flex flex-col items-end">
-              <div className="px-2 py-0.5 border border-emerald-500/30 rounded-sm">
-                <span className="micro-label text-emerald-500 text-[8px]">Available_for_Hire</span>
-              </div>
-              <span className="text-[8px] text-emerald-500/40 uppercase tracking-widest mt-1">(Open to Roles)</span>
-            </div>
-          </div>
+        <section className="mb-32 md:mb-48 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-8"
+          >
+            <span className="micro-label !text-white/60">Available for new opportunities</span>
+          </motion.div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-            <div className="lg:col-span-8">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="mb-4"
-              >
-                <span className="font-mono text-emerald-500 text-sm tracking-widest uppercase">Full Stack Developer</span>
-              </motion.div>
-              <motion.h1 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-medium mb-6 leading-[1.2] md:leading-[1.15] tracking-tight"
-              >
-                Building <span className="glow-text">scalable systems</span> and automated workflows for real-world use cases.
-              </motion.h1>
-              
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="text-base md:text-xl text-white/60 max-w-2xl leading-relaxed mb-8"
-              >
-                I am a Full-Stack Developer specializing in building robust web infrastructure and data-intensive systems. 
-                From high-throughput pipelines to intuitive user interfaces, I focus on 
-                reliability, scale, and technical excellence.
-              </motion.p>
+          <div className="max-w-4xl mx-auto">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-bold mb-8 leading-[1.1] tracking-tight gradient-text"
+            >
+              Building systems that scale.
+            </motion.h1>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-lg md:text-2xl text-white/50 max-w-2xl mx-auto leading-relaxed mb-12"
+            >
+              Full-Stack Developer specializing in robust web infrastructure, 
+              high-throughput pipelines, and intuitive interfaces.
+            </motion.p>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.15 }}
-                className="flex items-start md:items-center gap-3 mb-10"
-              >
-                <div className="h-px w-6 md:w-8 bg-emerald-500/30 mt-2 md:mt-0" />
-                <p className="micro-label text-emerald-500/60 text-[8px] sm:text-[9px] leading-relaxed">
-                  Building the invisible systems that power large-scale business operations.
-                </p>
-              </motion.div>
-
-              <div className="flex flex-wrap gap-4">
-                <a href="#projects" className="px-8 py-4 bg-emerald-500 text-black font-medium hover:bg-emerald-400 transition-colors flex flex-col items-center gap-1 group">
-                  <div className="flex items-center gap-2">
-                    Access_Project_Logs
-                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </div>
-                  <span className="text-[8px] uppercase tracking-widest opacity-60">(View Projects)</span>
-                </a>
-                <a href="#contact" className="px-8 py-4 border border-white/10 hover:bg-white/5 transition-colors flex flex-col items-center gap-1 group">
-                  <div className="flex items-center gap-2">
-                    Initiate_Contact
-                    <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                  </div>
-                  <span className="text-[8px] uppercase tracking-widest opacity-40">(Send Email)</span>
-                </a>
-              </div>
-            </div>
-
-            <div className="lg:col-span-4 flex flex-col gap-6">
-              <div className="hardware-card border-l-4 border-l-emerald-500 tactile-card dot-grid">
-                <div className="hardware-card-content p-6">
-                  <div className="flex flex-col mb-4">
-                    <span className="micro-label">Personnel_Profile</span>
-                    <span className="text-[8px] text-white/20 uppercase tracking-widest mt-1">(About Me)</span>
-                  </div>
-                  <div className="flex items-center gap-4 mb-8">
-                    <div className="w-16 h-16 bg-white/5 border border-white/10 flex items-center justify-center relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-transparent" />
-                      <User className="w-8 h-8 text-emerald-500/40" />
-                    </div>
-                    <div>
-                      <div className="text-lg font-medium">Shivam Singh</div>
-                      <div className="micro-label text-emerald-500/60">Full Stack Developer</div>
-                    </div>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center text-[10px] font-mono">
-                      <span className="text-white/40">LOCATION</span>
-                      <span className="text-white/80">MUMBAI, IN</span>
-                    </div>
-                    <div className="flex justify-between items-center text-[10px] font-mono">
-                      <span className="text-white/40">EXPERIENCE</span>
-                      <span className="text-white/80">1.9 years</span>
-                    </div>
-                    <div className="flex justify-between items-center text-[10px] font-mono">
-                      <span className="text-white/40">SPECIALIZATION</span>
-                      <span className="text-white/80">FULL_STACK</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="hardware-card border-l-4 border-l-emerald-500/30 tactile-card dot-grid">
-                <div className="hardware-card-content p-6">
-                  <div className="micro-label mb-4">Core_Competencies</div>
-                  <div className="space-y-4">
-                    {[
-                      { icon: Database, text: "Full-Stack Architecture" },
-                      { icon: Code2, text: "Frontend Engineering" },
-                      { icon: Cpu, text: "Backend Systems" },
-                      { icon: Layers, text: "Scalable Infrastructure" }
-                    ].map((item, i) => (
-                      <div key={i} className="flex items-center gap-3 text-sm text-white/80">
-                        <item.icon className="w-4 h-4 text-emerald-500" />
-                        {item.text}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="flex flex-wrap justify-center gap-4"
+            >
+              <a href="#projects" className="nav-link-primary !text-sm !px-10 !py-4">
+                View Projects
+              </a>
+              <a href="#contact" className="nav-link !text-sm !px-10 !py-4 border border-white/10">
+                Get in Touch
+              </a>
+            </motion.div>
           </div>
         </section>
 
-        {/* Metrics Bar */}
-        <section className="mb-32">
-          <div className="grid grid-cols-2 lg:grid-cols-4 border border-white/10 bg-ink/50 backdrop-blur-md tactile-card">
+        {/* Bento Grid Stats */}
+        <section className="mb-48">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { label: "Production Systems", value: "03", sub: "Built & Deployed" },
-              { label: "Data Throughput", value: "50K+", sub: "THROUGHPUT: 50K+ RECORDS" },
-              { label: "Annual Savings", value: "$15K+", sub: "VERIFIED: $15K+ SAVINGS" },
-              { label: "System Efficiency", value: "80%", sub: "EFFICIENCY: 80% LIFT" }
+              { label: "Data Throughput", value: "50K+", sub: "Records per run" },
+              { label: "Annual Savings", value: "$15K+", sub: "Verified impact" },
+              { label: "Efficiency Lift", value: "80%", sub: "System optimization" }
             ].map((metric, i) => (
-              <div key={i} className="p-8 border-r border-b lg:border-b-0 border-white/10 last:border-r-0">
-                <div className="micro-label mb-2">{metric.label}</div>
-                <div className="text-3xl font-mono font-bold text-emerald-500 mb-1">{metric.value}</div>
-                <div className="text-[10px] text-white/40 uppercase tracking-widest">{metric.sub}</div>
-              </div>
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bento-card p-8"
+              >
+                <div className="micro-label mb-4">{metric.label}</div>
+                <div className="text-4xl font-display font-bold text-white mb-2">{metric.value}</div>
+                <div className="text-xs text-white/30 uppercase tracking-widest">{metric.sub}</div>
+              </motion.div>
             ))}
           </div>
         </section>
 
         {/* Case Studies */}
-        <section id="projects" className="mb-32">
-          <div className="flex items-center justify-between mb-12">
-            <div>
-              <div className="micro-label mb-2">Section_01</div>
-              <h2 className="text-3xl font-medium">Case Studies</h2>
-            </div>
-            <div className="h-px flex-grow mx-8 bg-white/10 hidden md:block" />
-            <div className="text-right hidden md:block">
-              <div className="micro-label">Total_Projects</div>
-              <div className="font-mono text-emerald-500">03_SELECTED</div>
-            </div>
+        <section id="projects" className="mb-48">
+          <div className="flex flex-col items-center text-center mb-24">
+            <div className="micro-label mb-4">Selected Work</div>
+            <h2 className="text-4xl md:text-6xl font-display font-bold">Case Studies</h2>
           </div>
 
-          <div className="space-y-32">
+          <div className="space-y-48">
             {PROJECTS.map((project, idx) => (
               <motion.div 
                 key={project.id}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-12"
+                className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
               >
                 <div className="lg:col-span-5">
-                  <div className="sticky top-32">
-                    <div className="flex items-center gap-3 mb-6">
-                      <span className="font-mono text-emerald-500/50 text-sm">0{idx + 1}</span>
-                      <div className="h-px w-8 bg-emerald-500/30" />
-                      <span className="micro-label">{project.subtitle}</span>
-                    </div>
-                    <h3 className="text-4xl font-medium mb-6">{project.title}</h3>
-                    <p className="text-white/60 leading-relaxed mb-8">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-8">
-                      {project.tags.map(tag => (
-                        <span key={tag} className="px-3 py-1 bg-white/5 border border-white/10 text-[10px] font-mono text-white/60">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="space-y-4">
-                      {project.metrics.map(metric => (
-                        <div key={metric} className="flex items-center gap-3 text-sm font-mono text-emerald-400">
-                          <Zap className="w-3 h-3" />
-                          {metric}
-                        </div>
-                      ))}
-                    </div>
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="font-mono text-white/20 text-sm">0{idx + 1}</span>
+                    <div className="h-px w-8 bg-white/10" />
+                    <span className="micro-label">{project.subtitle}</span>
+                  </div>
+                  <h3 className="text-4xl md:text-5xl font-display font-bold mb-6">{project.title}</h3>
+                  <p className="text-white/50 text-lg leading-relaxed mb-8">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {project.tags.map(tag => (
+                      <span key={tag} className="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-[10px] font-mono text-white/40">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="space-y-4">
+                    {project.metrics.map(metric => (
+                      <div key={metric} className="flex items-center gap-3 text-sm font-mono text-white/80">
+                        <Zap className="w-4 h-4 text-white/40" />
+                        {metric}
+                      </div>
+                    ))}
                   </div>
                 </div>
 
                 <div className="lg:col-span-7">
-                  <div className="hardware-card tactile-card dot-grid">
-                    <div className="hardware-card-content p-8 lg:p-12">
-                      <div className="space-y-12">
-                        <section>
-                          <div className="micro-label mb-4 text-emerald-500/60">01_The_Problem</div>
-                          <p className="text-white/80 leading-relaxed">{project.problem}</p>
-                        </section>
-                        
-                        <section>
-                          <div className="micro-label mb-4 text-emerald-500/60">02_The_Approach</div>
-                          <p className="text-white/80 leading-relaxed">{project.approach}</p>
-                        </section>
+                  <div className="bento-card p-8 md:p-12">
+                    <div className="space-y-12">
+                      <section>
+                        <div className="micro-label mb-4">The Challenge</div>
+                        <p className="text-white/70 leading-relaxed">{project.problem}</p>
+                      </section>
+                      
+                      <section>
+                        <div className="micro-label mb-4">The Solution</div>
+                        <p className="text-white/70 leading-relaxed">{project.approach}</p>
+                      </section>
 
-                        {project.hasDiagram && <SEOPipelineDiagram />}
+                      {project.hasDiagram && <SEOPipelineDiagram />}
 
-                        <section className="p-6 bg-emerald-500/5 border border-emerald-500/20">
-                          <div className="micro-label mb-4 text-emerald-400">03_Engineering_Tradeoff</div>
-                          <p className="text-emerald-50/90 italic font-medium leading-relaxed">
-                            {project.tradeoff}
-                          </p>
-                        </section>
+                      <section className="p-8 bg-white/[0.02] border border-white/5 rounded-2xl">
+                        <div className="micro-label mb-4">Technical Insight</div>
+                        <p className="text-white/90 italic font-medium leading-relaxed">
+                          {project.tradeoff}
+                        </p>
+                      </section>
 
-                        <section>
-                          <div className="micro-label mb-4 text-emerald-500/60">04_Outcome</div>
-                          <p className="text-white/80 leading-relaxed">{project.outcome}</p>
-                        </section>
-
-                        <div className="pt-8 border-t border-white/5 flex items-center gap-4">
-                          <div className="p-2 bg-emerald-500/10 rounded border border-emerald-500/20">
-                            <Shield className="w-4 h-4 text-emerald-500" />
-                          </div>
-                          <div className="flex flex-col">
-                            <span className="text-[10px] font-mono text-emerald-500/80 uppercase tracking-widest">
-                              [SYSTEM_NOTICE]: Codebase_Encrypted_NDA
-                            </span>
-                            <span className="text-[9px] text-white/30 uppercase tracking-[0.15em] mt-1">
-                              Open for architecture walkthrough on a call
-                            </span>
-                          </div>
-                        </div>
-                      </div>
+                      <section>
+                        <div className="micro-label mb-4">Outcome</div>
+                        <p className="text-white/70 leading-relaxed">{project.outcome}</p>
+                      </section>
                     </div>
                   </div>
                 </div>
@@ -956,76 +829,66 @@ export default function App() {
         </section>
 
         {/* Engineering Philosophy */}
-        <section id="approach" className="mb-32">
-          <div className="hardware-card border-t-4 border-t-emerald-500 tactile-card dot-grid">
-            <div className="hardware-card-content p-12">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                <div className="lg:col-span-4">
-                  <div className="micro-label mb-4">Section_02</div>
-                  <h2 className="text-3xl font-medium mb-6">How I think <br />about systems</h2>
-                  <div className="dashed-line" />
-                  <p className="text-white/40 text-sm leading-relaxed">
-                    My approach is defined by three core principles that ensure systems remain 
-                    maintainable and performant under load.
-                  </p>
-                </div>
-                <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {[
-                    {
-                      title: "Constraints drive architecture",
-                      desc: "The 20-worker cap in the SEO pipeline isn't arbitrary — it's the intersection of Supabase's Edge Function concurrency limit and DataForSEO's rate limit. I build around real constraints, not ideal conditions."
-                    },
-                    {
-                      title: "Data integrity is non-negotiable",
-                      desc: "Field-level audit trails, idempotent batch operations, duplicate detection at the database layer — these aren't nice-to-haves in systems handling 50K-row imports. They're the difference between a system the client trusts and one they stop using."
-                    },
-                    {
-                      title: "Automation should be invisible",
-                      desc: "The best outcome for the SEO platform is that the team forgets the pipeline exists — rankings just appear every week. I design for zero manual intervention as the default state."
-                    },
-                    {
-                      title: "Data Lineage",
-                      desc: "Every record should tell a story. I implement field-level audit trails so we always know who changed what and when."
-                    }
-                  ].map((item, i) => (
-                    <div key={i} className="p-6 border border-white/5 bg-white/[0.02]">
-                      <div className="text-emerald-500 font-mono text-xs mb-2">0{i+1}_</div>
-                      <h4 className="text-lg font-medium mb-2">{item.title}</h4>
-                      <p className="text-sm text-white/60 leading-relaxed">{item.desc}</p>
-                    </div>
-                  ))}
-                </div>
+        <section id="approach" className="mb-48">
+          <div className="bento-card p-12 md:p-24">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+              <div className="lg:col-span-5">
+                <div className="micro-label mb-6">Philosophy</div>
+                <h2 className="text-4xl md:text-6xl font-display font-bold mb-8 leading-tight">Systems <br />Thinking</h2>
+                <p className="text-white/40 text-lg leading-relaxed">
+                  My approach is defined by three core principles that ensure systems remain 
+                  maintainable and performant under load.
+                </p>
+              </div>
+              <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8">
+                {[
+                  {
+                    title: "Constraints drive architecture",
+                    desc: "I build around real constraints, not ideal conditions. The 20-worker cap in the SEO pipeline is a direct response to platform concurrency limits."
+                  },
+                  {
+                    title: "Data integrity is non-negotiable",
+                    desc: "Audit trails and idempotent operations aren't optional. They're the foundation of systems handling 50K+ records."
+                  },
+                  {
+                    title: "Automation should be invisible",
+                    desc: "The best systems are the ones the team forgets exist. I design for zero manual intervention as the default state."
+                  },
+                  {
+                    title: "Data Lineage",
+                    desc: "Every record should tell a story. I implement field-level audit trails so we always know who changed what and when."
+                  }
+                ].map((item, i) => (
+                  <div key={i} className="p-8 bg-white/[0.02] border border-white/5 rounded-2xl">
+                    <div className="text-white/20 font-mono text-xs mb-4">0{i+1}</div>
+                    <h4 className="text-xl font-display font-bold mb-3">{item.title}</h4>
+                    <p className="text-sm text-white/50 leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
         {/* Skills */}
-        <section className="mb-32">
-          <div className="flex items-center gap-3 mb-12">
-            <div className="micro-label">Section_03</div>
-            <div className="h-px flex-grow bg-white/10" />
-            <h2 className="text-2xl font-medium">Technical Stack</h2>
+        <section className="mb-48">
+          <div className="flex flex-col items-center text-center mb-16">
+            <div className="micro-label mb-4">Capabilities</div>
+            <h2 className="text-4xl md:text-6xl font-display font-bold">Technical Stack</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 border border-white/10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {SKILLS.map((group, i) => (
-              <div key={i} className="bg-ink p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  {group.icon}
-                  <div className={`micro-label ${
-                    group.color === 'blue' ? 'text-blue-500/60' : 
-                    group.color === 'purple' ? 'text-purple-500/60' : 
-                    'text-emerald-500/60'
-                  }`}>{group.category}</div>
+              <div key={i} className="bento-card p-8">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="p-3 bg-white/5 rounded-xl border border-white/10">
+                    {group.icon}
+                  </div>
+                  <div className="micro-label">{group.category}</div>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {group.items.map(skill => (
-                    <span key={skill} className={`px-3 py-1 bg-white/5 text-[11px] font-mono border transition-colors ${
-                      group.color === 'blue' ? 'text-blue-400 border-blue-500/10 hover:border-blue-500/30' : 
-                      group.color === 'purple' ? 'text-purple-400 border-purple-500/10 hover:border-purple-500/30' : 
-                      'text-emerald-400 border-emerald-500/10 hover:border-emerald-500/30'
-                    }`}>
+                    <span key={skill} className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-xs font-mono text-white/60">
                       {skill}
                     </span>
                   ))}
@@ -1036,71 +899,60 @@ export default function App() {
         </section>
 
         {/* Resume Section */}
-        <section id="resume" className="mb-32">
-          <div className="hardware-card border-l-4 border-l-emerald-500 tactile-card dot-grid overflow-hidden">
-            <div className="hardware-card-content p-8 md:p-12">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div className="lg:col-span-7">
-                  <div className="micro-label mb-4">Section_04</div>
-                  <h2 className="text-4xl font-medium mb-6">Professional Credentials</h2>
-                  <p className="text-white/60 leading-relaxed mb-8 max-w-xl">
-                    My professional journey is documented in a comprehensive resume that highlights my technical expertise, 
-                    project impact, and engineering philosophy. Download the latest version for a detailed overview of my 
-                    experience and achievements.
-                  </p>
-                  <div className="flex flex-wrap gap-4">
-                    <a 
-                      href="https://drive.google.com/uc?export=download&id=1POexUhK0D3Vzvopldo8ga4H7FtmHP8OT" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="px-8 py-4 bg-emerald-500 text-black font-medium hover:bg-emerald-400 transition-colors flex flex-col items-center gap-1 group"
-                    >
-                      <div className="flex items-center gap-2">
-                        Download_Resume_v1.0
-                        <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-                      </div>
-                      <span className="text-[8px] uppercase tracking-widest opacity-60">(Direct Download)</span>
-                    </a>
-                    <a 
-                      href="https://drive.google.com/file/d/1POexUhK0D3Vzvopldo8ga4H7FtmHP8OT/view?usp=drive_link" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="px-8 py-4 border border-white/10 hover:bg-white/5 transition-colors flex flex-col items-center gap-1 group"
-                    >
-                      <div className="flex items-center gap-2">
-                        View_Online
-                        <ExternalLink className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                      </div>
-                      <span className="text-[8px] uppercase tracking-widest opacity-40">(Google Drive)</span>
-                    </a>
-                  </div>
+        <section id="resume" className="mb-48">
+          <div className="bento-card p-12 md:p-24 overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+              <div className="lg:col-span-7">
+                <div className="micro-label mb-6">Credentials</div>
+                <h2 className="text-4xl md:text-6xl font-display font-bold mb-8">Professional <br />History</h2>
+                <p className="text-white/40 text-lg leading-relaxed mb-12 max-w-xl">
+                  My professional journey is documented in a comprehensive resume that highlights my technical expertise, 
+                  project impact, and engineering philosophy.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <a 
+                    href="https://drive.google.com/uc?export=download&id=1POexUhK0D3Vzvopldo8ga4H7FtmHP8OT" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="nav-link-primary !text-sm !px-10 !py-4"
+                  >
+                    Download Resume
+                  </a>
+                  <a 
+                    href="https://drive.google.com/file/d/1POexUhK0D3Vzvopldo8ga4H7FtmHP8OT/view?usp=drive_link" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="nav-link !text-sm !px-10 !py-4 border border-white/10"
+                  >
+                    View Online
+                  </a>
                 </div>
-                <div className="lg:col-span-5 hidden lg:block">
-                  <div className="relative group">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 to-blue-500/20 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-                    <div className="relative bg-ink border border-white/10 p-8 rounded-lg">
-                      <div className="flex items-center justify-between mb-8">
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                          <span className="micro-label text-emerald-500">System_Status: Verified</span>
-                        </div>
-                        <FileText className="w-5 h-5 text-white/20" />
+              </div>
+              <div className="lg:col-span-5 hidden lg:block">
+                <div className="relative group">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-violet-500/20 to-blue-500/20 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                  <div className="relative bg-black border border-white/10 p-12 rounded-2xl">
+                    <div className="flex items-center justify-between mb-12">
+                      <div className="flex items-center gap-3">
+                        <div className="w-2 h-2 rounded-full bg-white animate-pulse"></div>
+                        <span className="micro-label">Verified</span>
                       </div>
-                      <div className="space-y-4">
-                        <div className="h-2 w-full bg-white/5 rounded"></div>
-                        <div className="h-2 w-3/4 bg-white/5 rounded"></div>
-                        <div className="h-2 w-5/6 bg-white/5 rounded"></div>
-                        <div className="h-2 w-1/2 bg-white/5 rounded"></div>
+                      <FileText className="w-6 h-6 text-white/20" />
+                    </div>
+                    <div className="space-y-6">
+                      <div className="h-2 w-full bg-white/5 rounded-full"></div>
+                      <div className="h-2 w-3/4 bg-white/5 rounded-full"></div>
+                      <div className="h-2 w-5/6 bg-white/5 rounded-full"></div>
+                      <div className="h-2 w-1/2 bg-white/5 rounded-full"></div>
+                    </div>
+                    <div className="mt-12 pt-12 border-t border-white/5 flex items-center justify-between">
+                      <div className="flex flex-col">
+                        <span className="micro-label mb-1">Format</span>
+                        <span className="text-sm font-mono text-white">PDF</span>
                       </div>
-                      <div className="mt-8 pt-8 border-t border-white/5 flex items-center justify-between">
-                        <div className="flex flex-col">
-                          <span className="text-[10px] font-mono text-white/40 uppercase">Format</span>
-                          <span className="text-[11px] font-mono text-emerald-500">PDF_DOCX</span>
-                        </div>
-                        <div className="flex flex-col items-end">
-                          <span className="text-[10px] font-mono text-white/40 uppercase">Last_Updated</span>
-                          <span className="text-[11px] font-mono text-emerald-500">MAR_2026</span>
-                        </div>
+                      <div className="flex flex-col items-end">
+                        <span className="micro-label mb-1">Updated</span>
+                        <span className="text-sm font-mono text-white">MAR 2026</span>
                       </div>
                     </div>
                   </div>
@@ -1111,30 +963,30 @@ export default function App() {
         </section>
 
         {/* Architecture Walkthrough CTA */}
-        <section className="mb-32">
-          <div className="hardware-card border-emerald-500/30 bg-emerald-500/[0.02] tactile-card dot-grid">
-            <div className="hardware-card-content p-8 md:p-16 text-center">
-              <div className="flex justify-center mb-8">
-                <div className="p-5 bg-emerald-500/10 rounded-full border border-emerald-500/20 animate-pulse">
-                  <Workflow className="w-10 h-10 text-emerald-500" />
+        <section className="mb-48">
+          <div className="bento-card p-12 md:p-24 text-center relative overflow-hidden">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <div className="max-w-3xl mx-auto">
+              <div className="flex justify-center mb-12">
+                <div className="p-6 bg-white/5 rounded-full border border-white/10">
+                  <Workflow className="w-12 h-12 text-white/40" />
                 </div>
               </div>
-              <h2 className="text-2xl md:text-4xl font-medium mb-6 uppercase tracking-tight">
-                Request_Architecture_Walkthrough
+              <h2 className="text-4xl md:text-6xl font-display font-bold mb-8 tracking-tight">
+                Deep Dive into the Architecture
               </h2>
-              <p className="text-white/50 text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+              <p className="text-white/40 text-lg md:text-xl mb-12 leading-relaxed">
                 Interested in the technical implementation details? I'm available for deep-dive calls to walk through system design, 
-                database schemas, and scaling strategies for any of the projects listed above.
+                database schemas, and scaling strategies.
               </p>
-              <div className="flex flex-col items-center gap-4">
+              <div className="flex flex-col items-center gap-6">
                 <a 
                   href="mailto:shivamsinghsrs@gmail.com?subject=Architecture Walkthrough Request"
-                  className="px-12 py-5 bg-emerald-500 text-black font-mono text-xs uppercase tracking-[0.2em] hover:bg-emerald-400 transition-all shadow-[0_0_30px_rgba(16,185,129,0.2)] group flex items-center gap-3"
+                  className="nav-link-primary !text-sm !px-12 !py-5"
                 >
-                  Initiate_System_Deep_Dive
-                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  Request Walkthrough
                 </a>
-                <span className="text-[10px] text-emerald-500/40 uppercase tracking-[0.3em] mt-2">
+                <span className="micro-label !text-white/20">
                   (Loom / Video Call / Technical Review)
                 </span>
               </div>
@@ -1143,57 +995,43 @@ export default function App() {
         </section>
 
         {/* Contact */}
-        <section id="contact">
-          <div className="hardware-card p-12 text-center relative overflow-visible tactile-card dot-grid">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 bg-[#0A0A0B] border border-white/10 z-30">
-              <div className="micro-label">Personnel_Signature</div>
-            </div>
-            <div className="hardware-card-content">
-              <h2 className="text-4xl lg:text-5xl font-medium mb-8">
-                Let's build the <br />
-                <span className="text-emerald-500 font-mono tracking-tighter">next_system.</span>
-              </h2>
-              <p className="text-white/60 mb-12 max-w-xl mx-auto leading-relaxed">
-                I'm currently looking for SDE-1 roles at product-driven companies. 
-                If you need someone who can bridge the gap between business needs and robust engineering, let's talk.
-              </p>
-              <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-                <a href="mailto:shivamsinghsrs@gmail.com" className="flex items-center gap-3 px-8 py-4 bg-emerald-500 text-black font-medium hover:bg-emerald-400 transition-colors">
-                  <Mail className="w-4 h-4" />
-                  Initiate_Contact
+        <section id="contact" className="mb-32">
+          <div className="bento-card p-12 md:p-24 text-center">
+            <h2 className="text-5xl md:text-8xl font-display font-bold mb-12 tracking-tighter">
+              Let's build the <br />
+              <span className="gradient-text">next system.</span>
+            </h2>
+            <p className="text-white/40 text-lg md:text-xl mb-16 max-w-2xl mx-auto leading-relaxed">
+              I'm open to new opportunities and collaborations. 
+              If you're looking for a developer who bridges the gap between technical complexity and business value, let's talk.
+            </p>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+              <a href="mailto:shivamsinghsrs@gmail.com" className="nav-link-primary !text-sm !px-12 !py-5">
+                Get in Touch
+              </a>
+              <div className="flex items-center gap-4">
+                <a href="https://linkedin.com/in/shiivmrajput" target="_blank" rel="noopener noreferrer" className="p-5 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition-colors">
+                  <Linkedin className="w-6 h-6" />
                 </a>
-                <div className="flex items-center gap-4">
-                  <a href="https://linkedin.com/in/shiivmrajput" target="_blank" rel="noopener noreferrer" className="p-4 border border-white/10 hover:bg-white/5 transition-colors">
-                    <Linkedin className="w-5 h-5" />
-                  </a>
-                  <a href="https://github.com/s6287" target="_blank" rel="noopener noreferrer" className="p-4 border border-white/10 hover:bg-white/5 transition-colors">
-                    <Github className="w-5 h-5" />
-                  </a>
-                </div>
-              </div>
-
-              <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
-                <div className="micro-label">© 2026 // Full Stack Developer</div>
-                <div className="flex items-center gap-4">
-                  <span className="micro-label text-emerald-500/40">Build_v1.0.4</span>
-                  <div className="h-3 w-px bg-white/10" />
-                  <span className="micro-label">Mumbai, India</span>
-                </div>
+                <a href="https://github.com/s6287" target="_blank" rel="noopener noreferrer" className="p-5 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition-colors">
+                  <Github className="w-6 h-6" />
+                </a>
               </div>
             </div>
           </div>
         </section>
       </main>
 
-      {/* Footer Micro-details */}
-      <footer className="max-w-7xl mx-auto px-6 pb-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-12 border-t border-white/5">
-          <div className="micro-label">© 2026 // ALL_RIGHTS_RESERVED</div>
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2">
-              <div className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="micro-label">Server_Status: Optimal</span>
-            </div>
+      {/* Footer */}
+      <footer className="max-w-7xl mx-auto px-6 pb-24">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 pt-12 border-t border-white/5">
+          <div className="flex items-center gap-4">
+            <div className="status-dot" />
+            <span className="micro-label">Available for Hire</span>
+          </div>
+          <div className="flex items-center gap-8">
+            <span className="micro-label">© 2026 Shivam Singh</span>
+            <span className="micro-label text-white/20">Build v2.0.0</span>
           </div>
         </div>
       </footer>

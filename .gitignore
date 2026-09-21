@@ -1,8 +1,13 @@
-node_modules/
-build/
-dist/
-coverage/
-.DS_Store
-*.log
+node_modules
+.next
+out
+build
+coverage
+next-env.d.ts
+*.tsbuildinfo
 .env*
-!.env.example
+.vercel
+.DS_Store
+
+# Client names covered by an NDA. Used by the content guard test. Never commit.
+.nda-terms.local

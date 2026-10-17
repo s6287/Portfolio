@@ -33,7 +33,7 @@ Three rules keep it simple:
 |---|---|---|
 | Spectra | Role-aware task board, drag and drop or buttons | `lib/board.ts` |
 | RankSense | Plan a rank-tracking run and see the requests avoided | `lib/dedup.ts` |
-| AttenView | Import a messy sheet: new, merged or sent to review | `lib/merge.ts` |
+| Supplier Journey CRM | Import a messy sheet: new, merged or sent to review | `lib/merge.ts` |
 | Catalogue SaaS | One storefront re-themed per event with CSS variables | `lib/editions.ts` |
 
 Every demo is an illustrative recreation with sample data. None of it is production code or client data.

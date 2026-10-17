@@ -103,8 +103,8 @@ export const work: CaseStudy[] = [
     demoIntro: "Three projects track overlapping keywords. Add or remove a few, then plan the run to see how many requests are actually needed.",
   },
   {
-    slug: "attenview",
-    title: "AttenView",
+    slug: "supplier-journey-crm",
+    title: "Supplier Journey CRM",
     kind: "Bulk-import CRM for an industry association",
     summary:
       "A CRM for a gifting industry association that had 50K+ contacts spread across spreadsheets. I built it alone in three weeks, around one hard problem: importing messy data without creating duplicates.",

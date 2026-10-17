@@ -1,6 +1,6 @@
 export type DemoId = "board" | "dedup" | "import" | "editions";
 
-export type CaseStudySlug = "spectra" | "ranksense" | "attenview" | "catalogue-saas";
+export type CaseStudySlug = "spectra" | "ranksense" | "supplier-journey-crm" | "catalogue-saas";
 
 export type CaseStudy = {
   slug: CaseStudySlug;

@@ -28,7 +28,7 @@ const isText = (file: string) => /\.(ts|tsx|css|md|svg|txt|json)$/.test(file);
 
 describe("content", () => {
   it("has four complete case studies in display order", () => {
-    expect(work.map((w) => w.slug)).toEqual(["spectra", "ranksense", "attenview", "catalogue-saas"]);
+    expect(work.map((w) => w.slug)).toEqual(["spectra", "ranksense", "supplier-journey-crm", "catalogue-saas"]);
     for (const study of work) {
       expect(study.summary.length).toBeGreaterThan(40);
       expect(study.problem.length).toBeGreaterThan(0);
